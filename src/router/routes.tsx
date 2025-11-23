@@ -8,6 +8,7 @@ const HealthyRecipesPage = React.lazy(() => import("../pages/healthy_recipes_pag
 const TrackProgressPage = React.lazy(() => import("../pages/track_progress_page"));
 const DietPlanPage = React.lazy(() => import("../pages/diet_plan_page"));
 const UserRegistrationPage = React.lazy(() => import("../pages/user_registration_page"));
+const LoginPage = React.lazy( () => import("../pages/login_page"))
 
 const routes: RouteObject[] = [
     {
@@ -59,6 +60,14 @@ const routes: RouteObject[] = [
                 element: (
                     <Suspense fallback={<div>Loading...</div>}>
                         <UserRegistrationPage />
+                    </Suspense>
+                )
+            },
+            {
+                path: "login",
+                element: (
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <LoginPage />
                     </Suspense>
                 )
             }

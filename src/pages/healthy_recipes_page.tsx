@@ -1,103 +1,100 @@
+import PageTitle from "../components/page_title";
+import PageContent from "../components/page_content";
+
 import React from "react";
+import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
+import MyCard from "../components/my_card";
 
 const HealthyRecipesPage: React.FC = () => {
     return (
         <>
-            <div className="hero">
+            {/* <div className="hero">
                 <h2>Explore Healthy & Delicious Recipes</h2>
                 <p>Search or filter recipes based on your mood, cravings, or fitness goals.</p>
-            </div>
+            </div> */}
 
-            <section>
-                <h2>Search Recipes 🔍</h2>
+            <PageTitle 
+                title="Explore Healthy & Delicious Recipes"
+                subtitle="Search or filter recipes based on your mood, 
+                cravings, or fitness goals."
+            />
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search for recipes..."
-                    style={{
-                        padding: "10px",
-                        width: "250px",
-                        borderRadius: "8px",
-                        border: "1px solid #9575cd"
-                    }}
-                />
+            <PageContent>
+                <Typography variant="h5" textAlign={'center'} 
+                fontWeight={'bold'} color="#7e57c2" marginBottom={'20px'}>
+                    Search Recipes 🔍
+                </Typography >
+                <Box component={'div'} className="w-1/2 mx-auto">
+                    <TextField variant="outlined" label="Search for recipes" size="small" fullWidth />
+                </Box>
+                
+                <Box component={'div'}  className="my-10">
+                    <Typography variant="h5" textAlign={'center'} 
+                        fontWeight={'bold'} color="#7e57c2" marginBottom={'20px'}>Filter by Category 🍽️</Typography>
+                    <Box component={'div'} className="flex flex-wrap gap-5 justify-center">
+                        <Button variant="contained">Breakfast</Button>
+                        <Button variant="contained">Lunch</Button>
+                        <Button variant="contained">Dinner</Button>
+                        <Button variant="contained">High Protein</Button>
+                        <Button variant="contained">Low Carbs</Button>
+                        <Button variant="contained">All</Button>
+                    </Box>
+                </Box>
 
-                <h2>Filter by Category 🍽️</h2>
+                <Box component={'div'} className="flex flex-wrap justify-center gap-10">
+                    <MyCard width="250px">
+                        <CardContent>
+                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Protein Oats</Typography>
+                        </CardContent>
+                        <CardContent>
+                            <Typography>Oats + banana + whey + nuts</Typography>
+                        </CardContent>
+                        <Box component={'div'} className="flex-grow" />
+                        <CardContent className="flex justify-center">
+                            <Button variant="contained" fullWidth>View More</Button>
+                        </CardContent>
+                    </MyCard>
 
-                <div style={{ marginBottom: "20px", display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
-                    <button className="filterBtn" data-category="breakfast">Breakfast</button>
-                    <button className="filterBtn" data-category="lunch">Lunch</button>
-                    <button className="filterBtn" data-category="dinner">Dinner</button>
-                    <button className="filterBtn" data-category="protein">High Protein</button>
-                    <button className="filterBtn" data-category="lowcarb">Low Carb</button>
-                    <button className="filterBtn" data-category="all">Show All</button>
-                </div>
+                    <MyCard width="250px">
+                        <CardContent>
+                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Grilled Chicken Salad</Typography>
+                        </CardContent>
+                        <CardContent>
+                            <Typography>Lean protein with fresh greens</Typography>
+                        </CardContent>
+                        <Box component={'div'} className="flex-grow" />
+                        <CardContent className="flex justify-center">
+                            <Button variant="contained" fullWidth>View More</Button>
+                        </CardContent>
+                    </MyCard>
 
-                <div className="content" id="recipeContainer">
+                    <MyCard width="250px">
+                        <CardContent>
+                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Veggie Stir Fry</Typography>
+                        </CardContent>
+                        <CardContent>
+                            <Typography>Colorful vegetables sautéed lightly</Typography>
+                        </CardContent>
+                        <Box component={'div'} className="flex-grow" />
+                        <CardContent className="flex justify-center">
+                            <Button variant="contained" fullWidth>View More</Button>
+                        </CardContent>
+                    </MyCard>
 
-                    {/* Recipe 1 */}
-                    <div className="card recipe" data-category="breakfast protein">
-                        <h3>Protein Oats</h3>
-                        <p>Oats + banana + whey + nuts</p>
-                        <button>View More</button>
-
-                        <div
-                            className="details"
-                            style={{ display: "none", marginTop: "10px" }}
-                        >
-                            <p><b>Ingredients:</b> Oats, whey protein, milk, nuts, honey.</p>
-                            <p><b>Instructions:</b> Mix all ingredients and cook for 5 minutes.</p>
-                        </div>
-                    </div>
-
-                    {/* Recipe 2 */}
-                    <div className="card recipe" data-category="lunch lowcarb">
-                        <h3>Grilled Chicken Salad</h3>
-                        <p>Lean protein with fresh greens</p>
-                        <button>View More</button>
-
-                        <div
-                            className="details"
-                            style={{ display: "none", marginTop: "10px" }}
-                        >
-                            <p><b>Ingredients:</b> Chicken, lettuce, veggies, olive oil.</p>
-                            <p><b>Instructions:</b> Grill chicken and toss with veggies.</p>
-                        </div>
-                    </div>
-
-                    {/* Recipe 3 */}
-                    <div className="card recipe" data-category="dinner">
-                        <h3>Veggie Stir Fry</h3>
-                        <p>Colorful vegetables sautéed lightly</p>
-                        <button>View More</button>
-
-                        <div
-                            className="details"
-                            style={{ display: "none", marginTop: "10px" }}
-                        >
-                            <p><b>Ingredients:</b> Carrots, beans, peppers, soy sauce.</p>
-                            <p><b>Instructions:</b> Stir fry all veggies for 8 minutes.</p>
-                        </div>
-                    </div>
-
-                    {/* Recipe 4 */}
-                    <div className="card recipe" data-category="breakfast">
-                        <h3>Fruit Smoothie Bowl</h3>
-                        <p>Blended fruits with toppings</p>
-                        <button>View More</button>
-
-                        <div
-                            className="details"
-                            style={{ display: "none", marginTop: "10px" }}
-                        >
-                            <p><b>Ingredients:</b> Mango, banana, yogurt, chia seeds.</p>
-                            <p><b>Instructions:</b> Blend fruits and top with seeds.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
+                    <MyCard width="250px">
+                        <CardContent>
+                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Fruit Smoothie Bowl</Typography>
+                        </CardContent>
+                        <CardContent>
+                            <Typography>Blended fruits with toppings</Typography>
+                        </CardContent>
+                        <Box component={'div'} className="flex-grow" />
+                        <CardContent className="flex justify-center">
+                            <Button variant="contained" fullWidth>View More</Button>
+                        </CardContent>
+                    </MyCard>
+                </Box>
+            </PageContent>
         </>
     );
 };

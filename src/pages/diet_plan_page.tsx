@@ -1,112 +1,91 @@
+import PageTitle from "../components/page_title";
+
 import React from "react";
+import { Box, Button, CardContent, FormControl, FormControlLabel, FormLabel, InputAdornment, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
+import PageContent from "../components/page_content";
+import MyCard from "../components/my_card";
 
 const DietPlanPage: React.FC = () => {
     return (
         <>
-        <div className="hero">
-                <h2>Your Personalized Diet Plan</h2>
-                <p>Calculate your BMI & daily calories to get an ideal diet recommendation.</p>
-            </div>
-            <section>
-                {/* <h2>Your Personalized Diet Plan</h2>
-                <p>Calculate your BMI & daily calories to get an ideal diet recommendation.</p> */}
+            <PageTitle
+                title="Your Personalized Diet Plan"
+                subtitle="Calculate your BMI & daily calories to get an ideal diet recommendation."
+            />
 
-                <div
-                    className="content"
-                    // style={{
-                    //     flexDirection: "column",
-                    //     maxWidth: "500px",
-                    //     margin: "auto"
-                    // }}
-                >
-
-                    {/* BMI Calculator */}
-                    <div className="card">
-                        <h3>BMI Calculator</h3>
-
-                        <label>Height (cm)</label>
-                        <input
-                            type="number"
-                            id="height"
-                            placeholder="Enter height"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
+            <PageContent>
+                <Box component={'div'} className="flex justify-center flex-wrap gap-10" >
+                    {/* <h2>Your Personalized Diet Plan</h2>
+                    <p>Calculate your BMI & daily calories to get an ideal diet recommendation.</p> */}
+                    <MyCard width="300px">
+                        <CardContent>
+                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>BMI Calculator</Typography>
+                        </CardContent>
+                        <CardContent className="gap-4 flex flex-col">
+                            <TextField size="small" variant="outlined" 
+                            label="Height" fullWidth
+                            slotProps={{
+                                input: {
+                                    endAdornment: <InputAdornment position="end">cm</InputAdornment>
+                                }
                             }}
-                        />
-
-                        <label>Weight (kg)</label>
-                        <input
-                            type="number"
-                            id="weight"
-                            placeholder="Enter weight"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
+                            />
+                            <TextField size="small" variant="outlined" 
+                            label="Weight" fullWidth
+                            slotProps={{
+                                input: {
+                                    endAdornment: <InputAdornment position="end">kg</InputAdornment>
+                                }
                             }}
-                        />
+                            />
+                        </CardContent>
+                        <Box className="flex-grow"></Box>
+                        <CardContent>
+                            <Button variant="contained" fullWidth>Calculate</Button>
+                        </CardContent>
+                    </MyCard>
 
-                        <button>Calculate BMI</button>
-                        <p id="bmiResult"></p>
-                    </div>
+                    <MyCard width="300px">
+                        <CardContent>
+                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Daily Calories Need</Typography>
+                        </CardContent>
+                        <CardContent className="gap-4 flex flex-col">
+                            <TextField size="small" variant="outlined" 
+                            label="Age" fullWidth
+                            />
+                            <FormControl fullWidth>
+                                <FormLabel sx={{textAlign: 'left'}}>Gender</FormLabel>
+                                <RadioGroup row>
+                                    <FormControlLabel value={"male"} control={<Radio />} label="Male" />
+                                    <FormControlLabel value={"female"} control={<Radio />} label="Female" />
+                                </RadioGroup>
+                            </FormControl>
+                            <FormControl fullWidth size="small">
+                            <InputLabel id="activity-level-label">Activity Level</InputLabel>
+                            <Select label="Activity Level" id="activity-level" labelId="activity-level-label" value={"sedentary"}>
+                                <MenuItem value="sedentary">Sedentary</MenuItem>
+                                <MenuItem value="light_active">Light Active</MenuItem>
+                                <MenuItem value="light_active">Light Active</MenuItem>
+                            </Select>
+                            </FormControl>
+                        </CardContent>
+                        <Box className="flex-grow"></Box>
+                        <CardContent >
+                            <Button variant="contained" fullWidth>Calculate</Button>
+                        </CardContent>
+                    </MyCard>
 
-                    {/* Daily Calorie Needs */}
-                    <div className="card">
-                        <h3>Daily Calorie Needs</h3>
+                    <MyCard width="300px">
+                        <CardContent>
+                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Recommended Diet Plan</Typography>
+                        </CardContent>
+                        <CardContent>
+                            <Typography>Fill details to generate plan...</Typography>
+                        </CardContent>
+                    </MyCard>
+                </Box>
+            </PageContent>
 
-                        <label>Age</label>
-                        <input
-                            type="number"
-                            id="age"
-                            placeholder="Enter age"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}
-                        />
-
-                        <label>Gender</label>
-                        <select id="gender" style={{
-                                padding: "8px",
-                                width: "97%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-
-                        <label>Activity Level</label>
-                        <select id="activity" style={{
-                                padding: "8px",
-                                width: "97%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}>
-                            <option value="1.2">Sedentary</option>
-                            <option value="1.375">Lightly Active</option>
-                            <option value="1.55">Moderately Active</option>
-                            <option value="1.725">Very Active</option>
-                        </select>
-
-                        <button>Calculate Calories</button>
-                        <p id="calorieResult"></p>
-                    </div>
-
-                    {/* Diet Plan */}
-                    <div className="card">
-                        <h3>Recommended Diet Plan</h3>
-                        <p id="dietPlan">Fill details to generate plan...</p>
-                    </div>
-
-                </div>
-            </section>
         </>
     );
 };

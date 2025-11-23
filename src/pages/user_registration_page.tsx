@@ -1,141 +1,48 @@
+import PageTitle from "../components/page_title";
+import PageContent from "../components/page_content";
+
 import React from "react";
+import { Typography, CardContent, TextField, Box, Button } from "@mui/material";
+import MyCard from "../components/my_card";
 
 const UserRegistrationPage: React.FC = () => {
 
-    const checkStrength = () => {
-        console.log("Checking strength... (add logic)");
-    };
-
-    const registerUser = () => {
-        console.log("Register user... (add logic)");
-    };
-
-    // const clearUser = () => {
-    //     console.log("Clear user... (add logic)");
+    // const checkStrength = () => {
+    //     console.log("Checking strength... (add logic)");
     // };
+
+    // const registerUser = () => {
+    //     console.log("Register user... (add logic)");
+    // };
+
+    // // const clearUser = () => {
+    // //     console.log("Clear user... (add logic)");
+    // // };
 
     return (
         <>
-            <section style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                <h2>Create Your Account</h2>
-                <p>Enter your details to generate a personalized fitness and diet plan.</p>
+        <PageTitle title="Create Your Account" subtitle="Enter your details to generate a personalized fitness and diet plan." />
 
-                <div
-                    className="content"
-                    style={{
-                        flexDirection: "column",
-                        maxWidth: "450px",
-                        margin: "auto"
-                    }}
-                >
-
-                    {/* Registration Form */}
-                    <div className="card">
-                        <h3>Registration Form</h3>
-
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            placeholder="Enter name"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}
-                        />
-
-                        <label>Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter email"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}
-                        />
-
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Enter password"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}
-                            onInput={checkStrength}
-                        />
-
-                        <p id="strengthText" style={{ fontSize: "0.9em", fontWeight: "bold" }}></p>
-
-                        <label>Age</label>
-                        <input
-                            type="number"
-                            id="age"
-                            placeholder="Enter age"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}
-                        />
-
-                        <label>Height (cm)</label>
-                        <input
-                            type="number"
-                            id="height"
-                            placeholder="Enter height"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}
-                        />
-
-                        <label>Weight (kg)</label>
-                        <input
-                            type="number"
-                            id="weight"
-                            placeholder="Enter weight"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}
-                        />
-
-                        <label>Goal</label>
-                        <select
-                            id="goal"
-                            style={{
-                                padding: "8px",
-                                width: "90%",
-                                borderRadius: "8px",
-                                border: "1px solid #9575cd"
-                            }}
-                        >
-                            <option value="weight_loss">Weight Loss</option>
-                            <option value="balanced">Balanced Diet</option>
-                            <option value="muscle_gain">Muscle Gain</option>
-                        </select>
-
-                        <button onClick={registerUser}>Register</button>
-
-                        <p id="result" style={{ marginTop: "10px" }}></p>
-                    </div>
-
-                </div>
-            </section>
+        <PageContent>
+            <Box component={'div'} className="flex justify-center">
+                <MyCard width="500px">
+                    <CardContent>
+                        <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Registration Form</Typography>
+                    </CardContent>
+                    <CardContent className="flex flex-col gap-5">
+                        <TextField variant="outlined" size="small" label="Name" fullWidth />
+                        <TextField variant="outlined" size="small" label="Email" fullWidth />
+                        <TextField variant="outlined" size="small" label="Password" fullWidth />
+                        <TextField variant="outlined" size="small" label="Age" fullWidth />
+                        <TextField variant="outlined" size="small" label="Height" fullWidth />
+                        <TextField variant="outlined" size="small" label="Goal" fullWidth />
+                    </CardContent>
+                    <CardContent>
+                        <Button variant="contained" fullWidth>Register</Button>
+                    </CardContent>
+                </MyCard>
+            </Box>
+        </PageContent>
         </>
     );
 };

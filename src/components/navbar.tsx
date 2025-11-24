@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
                         fontWeight: 'bold'
                     })}>NutriMate</Typography>
                     <Typography variant="h4" sx={(theme) => ({
-                        display: {sm: 'none', md:'block'},
+                        display: {xs: 'none', md:'block'},
                         color: theme.palette.secondary.main,
                         fontWeight: 'bold'
                     })}>
@@ -25,16 +25,16 @@ const Navbar: React.FC = () => {
                     </Box>
                     <Box component={'div'} className="flex-grow"></Box>
                     <IconButton sx={{
-                        display: {sm: 'block', md: 'none'}
+                        display: {xs: 'block', md: 'none'}
                     }}>
                         <MenuIcon></MenuIcon>
                     </IconButton>
                 </Box>
                 <AppBar position="relative" sx={{
-                    display: {sm: 'none', md: 'block'}
+                    display: {xs: 'none', md: 'block'}
                 }}>
                     <Toolbar component={'nav'} className="items-center" sx={( theme )=> ({
-                        height: { sm: '48px', md: '64px'},
+                        height: { xs: '48px', md: '64px'},
                         padding: '0 !important',
                         '& a': {
                             paddingX: '25px',

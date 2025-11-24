@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import Typography from '@mui/material/Typography'
-import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 
 const Navbar: React.FC = () => {
+    const [ open, setOpen ] = useState<boolean>( false )
+
     return (
         <>
             <Box component={'header'}>
@@ -24,7 +26,7 @@ const Navbar: React.FC = () => {
                     </Typography>
                     </Box>
                     <Box component={'div'} className="flex-grow"></Box>
-                    <IconButton sx={{
+                    <IconButton onClick={()=>setOpen(true)} sx={{
                         display: {xs: 'block', md: 'none'}
                     }}>
                         <MenuIcon></MenuIcon>
@@ -60,6 +62,58 @@ const Navbar: React.FC = () => {
                         <Typography component={NavLink} to="/user-registration" end >Sign Up</Typography>
                     </Toolbar>
                 </AppBar>
+
+                <Drawer open={open} anchor="right" onClose={() => setOpen(false)}>
+                    <Box component={'div'} role="presentation" className="w-60 h-full" onClick={()=>setOpen(false)} sx={(theme) => ({
+                        bgcolor: theme.palette.primary.main,
+                        color: "white"
+                    })}  >
+                        <List sx={(theme) => ({
+                            '& a': {
+                                '&.active': {
+                                    bgcolor: theme.palette.secondary.main + ' !important'
+                                }
+                            }
+                        })}>
+                            <ListItem disablePadding>
+                                <ListItemButton component={NavLink} to="/" end selected={true}>
+                                    <ListItemText primary="Home" />
+                                </ListItemButton>
+                                {/* <Typography component={NavLink} to={'/'} end>Home</Typography> */}
+                            </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemButton component={NavLink} to="/meal-plan" end >
+                                    <ListItemText primary="Meal Plan" />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemButton component={NavLink} to="/healthy-recipes" end >
+                                    <ListItemText primary="Healthy Recipes" />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemButton component={NavLink} to="/track-progress" end >
+                                    <ListItemText primary="Track Progress" />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemButton component={NavLink} to="/diet-plan" end >
+                                    <ListItemText primary="Diet Plan" />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemButton component={NavLink} to="/login" end >
+                                    <ListItemText primary="Log in" />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemButton component={NavLink} to="/user-registration" end >
+                                    <ListItemText primary="Sign Up" />
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
+                    </Box>
+                </Drawer>
             </Box>
         </>
     );

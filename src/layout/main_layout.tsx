@@ -21,8 +21,8 @@ const MainLayout: React.FC = () => {
                 overflowY: 'auto'
             }} className="flex-1">
                 <Outlet />
+                <Footer />
             </Box>
-            <Footer />
         </div>
         </>
     );

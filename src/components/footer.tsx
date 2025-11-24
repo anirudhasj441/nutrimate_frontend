@@ -1,11 +1,13 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 
 const Footer: React.FC = () => {
     return (
-        <Box component={'footer'} className="text-white py-3 px-5" bgcolor="primary.main">
+        <AppBar position="sticky" component={'footer'} className="text-white">
+            <Toolbar>
             &copy; 2025 NutriMate | Stay Fit. Stay Healthy. 🌿
-        </Box>
+            </Toolbar>
+        </AppBar>
     );
 
 };

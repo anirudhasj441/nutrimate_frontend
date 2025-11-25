@@ -26,7 +26,9 @@ const IndexPage: React.FC = () => {
                 <Box component={'section'} className="flex
                     justify-center gap-10 flex-wrap"
                 >
-                    <MyCard width="250px">
+                    <MyCard width="250px" sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontWeight={'bold'}
                                 align="center" fontSize={18}>Meal Plan 🍽️</Typography>
@@ -44,7 +46,9 @@ const IndexPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="250px">
+                    <MyCard width="250px" sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontWeight={'bold'}
                                 align="center" fontSize={18}>
@@ -64,7 +68,9 @@ const IndexPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="250px">
+                    <MyCard width="250px" sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontWeight={'bold'} align="center" fontSize={18}>Track Progress 📊</Typography>
                             <Typography>Monitor your daily calories, steps, and fitness milestones.</Typography>
@@ -75,7 +81,9 @@ const IndexPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="250px">
+                    <MyCard width="250px" sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontWeight={'bold'} align="center" fontSize={18}>Diet Plan 🥤</Typography>
                             <Typography>Choose a diet that suits your lifestyle — keto, vegan, or balanced.</Typography>
@@ -86,7 +94,9 @@ const IndexPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="250px">
+                    <MyCard width="250px" sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontWeight={'bold'} align="center" fontSize={18}>User Registration 👤</Typography>
                             <Typography>Fill in your personal info — age, height, weight & goals — to get a personalized plan.</Typography>

@@ -32,7 +32,9 @@ const TrackProgressPage: React.FC = () => {
                     </Typography >
 
                     <Box component={'div'} className="flex flex-wrap justify-center gap-10">
-                        <MyCard width="300px">
+                        <MyCard sx={{
+                        width: {xs: '100%', md: '300px'}
+                    }}>
                             <CardContent>
                                 <Typography fontSize={'18px'} fontWeight={'bold'}>Calories Consumed 🔥</Typography>
                             </CardContent>
@@ -44,7 +46,9 @@ const TrackProgressPage: React.FC = () => {
                             </CardContent>
                         </MyCard>
 
-                        <MyCard width="300px">
+                        <MyCard sx={{
+                        width: {xs: '100%', md: '300px'}
+                    }}>
                             <CardContent>
                                 <Typography fontSize={'18px'} fontWeight={'bold'}>Steps Walked 👣</Typography>
                             </CardContent>
@@ -56,7 +60,9 @@ const TrackProgressPage: React.FC = () => {
                             </CardContent>
                         </MyCard>
 
-                        <MyCard width="300px">
+                        <MyCard sx={{
+                        width: {xs: '100%', md: '300px'}
+                    }}>
                             <CardContent>
                                 <Typography fontSize={'18px'} fontWeight={'bold'}>Water Intake 💧</Typography>
                             </CardContent>
@@ -77,7 +83,9 @@ const TrackProgressPage: React.FC = () => {
                     </Typography >
 
                     <Box component={'div'} className="flex justify-center">
-                        <MyCard width="300px">
+                        <MyCard sx={{
+                        width: {xs: '100%', md: '300px'}
+                    }}>
                             <CardContent>
                                 <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Today's Summary</Typography>
                             </CardContent>

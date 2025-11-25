@@ -17,7 +17,9 @@ const DietPlanPage: React.FC = () => {
                 <Box component={'div'} className="flex justify-center flex-wrap gap-10" >
                     {/* <h2>Your Personalized Diet Plan</h2>
                     <p>Calculate your BMI & daily calories to get an ideal diet recommendation.</p> */}
-                    <MyCard width="300px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '300px'}
+                    }} >
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>BMI Calculator</Typography>
                         </CardContent>
@@ -45,7 +47,9 @@ const DietPlanPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="300px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '300px'}
+                    }} >
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Daily Calories Need</Typography>
                         </CardContent>
@@ -75,7 +79,9 @@ const DietPlanPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="300px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '300px'}
+                    }} >
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Recommended Diet Plan</Typography>
                         </CardContent>

@@ -25,7 +25,9 @@ const MealPlanPage: React.FC = () => {
                     Weekly Meal Overview 🍽️
                 </Typography >
                 <Box component={'div'} className="flex flex-wrap gap-10 justify-center">
-                    <MyCard width="250px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Monday</Typography>
                         </CardContent>
@@ -35,7 +37,9 @@ const MealPlanPage: React.FC = () => {
                             <Typography marginY={'16px'}>Dinner: Veggie stir-fry</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard width="250px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Tuesday</Typography>
                         </CardContent>
@@ -45,7 +49,9 @@ const MealPlanPage: React.FC = () => {
                             <Typography marginY={'16px'}>Dinner: Soup + salad</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard width="250px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Wednesday</Typography>
                         </CardContent>
@@ -55,7 +61,9 @@ const MealPlanPage: React.FC = () => {
                             <Typography marginY={'16px'}>Dinner: Soup + salad</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard width="250px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Thursday</Typography>
                         </CardContent>
@@ -65,7 +73,9 @@ const MealPlanPage: React.FC = () => {
                             <Typography marginY={'16px'}>Dinner: Quinoa bowl</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard width="250px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Friday</Typography>
                         </CardContent>
@@ -75,7 +85,9 @@ const MealPlanPage: React.FC = () => {
                             <Typography marginY={'16px'}>Dinner: Sprouts salad</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard width="250px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Saturday</Typography>
                         </CardContent>
@@ -85,7 +97,9 @@ const MealPlanPage: React.FC = () => {
                             <Typography marginY={'16px'}>Dinner: Pasta (wheat)</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard width="250px">
+                    <MyCard sx={{
+                        width: {xs: '100%', md: '250px'}
+                    }}>
                         <CardContent>
                             <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Sunday</Typography>
                         </CardContent>

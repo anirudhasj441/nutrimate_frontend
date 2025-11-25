@@ -1,10 +1,11 @@
 import React from "react";
 import { Card } from "@mui/material";
-
+import type { SxProps, Theme }  from "@mui/material";
 interface IMyCard {
     children: React.ReactNode,
     width? : string,
-    height?: string
+    height?: string,
+    sx?: SxProps<Theme>
 }
 
 const MyCard: React.FC<IMyCard> = ( props: IMyCard ) => {
@@ -17,7 +18,8 @@ const MyCard: React.FC<IMyCard> = ( props: IMyCard ) => {
             '& .MuiCardContent-root': {
                 height: props.height ?? 'auto',
                 textAlign: 'center'
-            }
+            },
+            ...props.sx
         }}>
             {props.children}
         </Card>

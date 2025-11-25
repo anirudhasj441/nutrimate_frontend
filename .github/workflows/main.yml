@@ -41,6 +41,4 @@ jobs:
             
             # Upload files
             - name: Upload files
-              run: aws s3 sync dist/ s3://${{ vars.BUCKET_NAME }} \
-                   --delete --cache-control "max-age=0, no-cache, \
-                   no-store, must-revalidate"
+              run: aws s3 sync dist/ s3://${{ vars.BUCKET_NAME }} --delete --cache-control "max-age=0, no-cache, no-store, must-revalidate"

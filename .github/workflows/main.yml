@@ -28,6 +28,9 @@ jobs:
             
             # Build project
             - name: Build Project
+              env:
+                VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
+                
               run: npm run build
 
             # Configure AWS

@@ -1,9 +1,8 @@
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import userContext from './core/User/context';
+import {UserProvider} from './core/User/user_provider';
 import router from "./router";
-import User from './core/User';
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -16,15 +15,15 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-const user = new User()
+// const user = new User()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <userContext.Provider value={user}>
-      <RouterProvider router={router} />
-      </userContext.Provider>
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
     </ThemeProvider>
   </StrictMode>,
 )

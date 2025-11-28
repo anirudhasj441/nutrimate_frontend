@@ -44,9 +44,10 @@ class User{
 
             if (!res.ok) throw new Error("User is not authenticated");
 
-            // const response = await res.json();
+            const response = await res.json();
 
             this.mIsAuthenticated = true;
+            this.mUserData = response.payload
             return true;
         } catch (error) {
             console.error("Error during authentication check:", error);

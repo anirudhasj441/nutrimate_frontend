@@ -1,11 +1,17 @@
-import React, {useState} from "react";
+// import type User from "../core/User";
+
+import {userContext} from "../core/User/user_provider";
+
+import React, { useContext, useState} from "react";
 import Typography from '@mui/material/Typography'
 import { AppBar, Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
+import type { IUser } from "../core/User/types";
 
 const Navbar: React.FC = () => {
     const [ open, setOpen ] = useState<boolean>( false )
+    const user = useContext<IUser>( userContext );
 
     return (
         <>
@@ -58,8 +64,13 @@ const Navbar: React.FC = () => {
                         <Typography component={NavLink} to="/track-progress" end >Track Progress</Typography>
                         <Typography component={NavLink} to="/diet-plan" end >Diet Plan</Typography>
                         <div className="flex-1"></div>
-                        <Typography component={NavLink} to="/login" end >Log in</Typography>
-                        <Typography component={NavLink} to="/user-registration" end >Sign Up</Typography>
+                        { user.isAuthenticated ?
+                            <Typography className="p-5">{user.userData?.first_name}</Typography> :
+                            <>
+                                <Typography component={NavLink} to="/login" end >Log in</Typography>
+                                <Typography component={NavLink} to="/user-registration" end >Sign Up</Typography>
+                            </>
+                        }
                     </Toolbar>
                 </AppBar>
 

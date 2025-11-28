@@ -1,5 +1,4 @@
-import userContext from "../core/User/context";
-import User from "../core/User";
+import {userContext} from "../core/User/user_provider";
 
 import PageContent from "../components/page_content";
 import PageTitle from "../components/page_title";
@@ -8,12 +7,13 @@ import MyCard from "../components/my_card";
 import React, { useContext, useState } from "react";
 import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
 import { Form } from "react-router-dom";
+import type { IUser } from "../core/User/types";
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const user: User = useContext<User>( userContext );
+    const user = useContext<IUser>( userContext );
 
     const login = async ( ) => {
         const res = await user.login( username, password );

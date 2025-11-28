@@ -10,4 +10,17 @@ interface IUserData {
     password?: string
 }
 
-export type {IUserData};
+interface IUserProvider {
+    children: React.ReactNode;
+}
+
+interface IUser {
+    isAuthenticated: boolean,
+    userData: IUserData | null,
+    authenticate: () => Promise<boolean>,
+    login: ( username: string, password: string) => Promise<boolean>,
+    logout: () => void,
+    signup: ( userData: IUserData ) => Promise<boolean>
+}
+
+export type { IUserData, IUserProvider, IUser };

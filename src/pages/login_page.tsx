@@ -1,35 +1,24 @@
-import React, { useState } from "react";
-import PageTitle from "../components/page_title";
+import userContext from "../core/User/context";
+import User from "../core/User";
+
 import PageContent from "../components/page_content";
-import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
+import PageTitle from "../components/page_title";
 import MyCard from "../components/my_card";
+
+import React, { useContext, useState } from "react";
+import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
 import { Form } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
+    const user: User = useContext<User>( userContext );
+
     const login = async ( ) => {
-
-        const baseUrl = import.meta.env.VITE_BACKEND_URL;
-        const data = {
-            username: username,
-            password: password
-        }
-
-        const res = await fetch( baseUrl + '/auth/login'    , {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify( data )
-        } )
-
-        if (!res.ok) throw new Error("Login failed");
-
-        const response = await res.json();
-
-        console.log( response );
+        const res = await user.login( username, password );
+        console.log( res ? "LOgin successfull": "login failed");
+        console.log( user.userData )
     }
 
     return (

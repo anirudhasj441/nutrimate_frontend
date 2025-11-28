@@ -1,8 +1,11 @@
+import User from "../core/User";
+import userContext from "../core/User/context";
+
 import PageTitle from "../components/page_title";
 import PageContent from "../components/page_content";
 import MyCard from "../components/my_card";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import type { Dayjs } from "dayjs";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -10,6 +13,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Typography, CardContent, TextField, Box, Button, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import dayjs from "dayjs";
 import { Form } from "react-router-dom";
+import type { IUserData } from "../core/User/types";
 
 const UserRegistrationPage: React.FC = () => {
 
@@ -17,35 +21,26 @@ const UserRegistrationPage: React.FC = () => {
     //     console.log("Checking strength... (add logic)");
     // };
 
+    const user = useContext<User>( userContext );
+
     const registerUser = async () => {
-        const data = {
+        const data: IUserData = {
             username: username,
             first_name: firstName,
             last_name: lsatName,
             password: password,
             email: email,
-            birth_date: birthDate?.format('YYYY-MM-DD'),
+            birth_date: birthDate?.format('YYYY-MM-DD') ?? '',
             height: height,
             weight: weight,
             goal: goal,
         }
         console.log("Register user... (add logic)", data);
 
-        const baseUrl = import.meta.env.VITE_BACKEND_URL;
+        const res = await user.signup( data );
 
-        const res = await fetch( baseUrl+'/auth/signup', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        if (!res.ok) throw new Error("Login failed");
-
-        const response = await res.json();
-
-        console.log( response )
+        console.log( res ? "signup successfull": "signup failed");
+        
     };
 
     // // const clearUser = () => {

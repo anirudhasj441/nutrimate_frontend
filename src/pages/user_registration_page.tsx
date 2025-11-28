@@ -1,5 +1,5 @@
 import User from "../core/User";
-import userContext from "../core/User/user_provider";
+import {userContext} from "../core/User/user_provider";
 
 import PageTitle from "../components/page_title";
 import PageContent from "../components/page_content";

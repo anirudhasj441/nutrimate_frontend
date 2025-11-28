@@ -1,5 +1,4 @@
-import User from "../core/User";
-import userContext from "../core/User/user_provider";
+import {userContext} from "../core/User/user_provider";
 
 import PageTitle from "../components/page_title";
 import PageContent from "../components/page_content";
@@ -13,7 +12,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Typography, CardContent, TextField, Box, Button, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import dayjs from "dayjs";
 import { Form } from "react-router-dom";
-import type { IUserData } from "../core/User/types";
+import type { IUser, IUserData } from "../core/User/types";
 
 const UserRegistrationPage: React.FC = () => {
 
@@ -21,7 +20,7 @@ const UserRegistrationPage: React.FC = () => {
     //     console.log("Checking strength... (add logic)");
     // };
 
-    const user = useContext<User>( userContext );
+    const user = useContext<IUser>( userContext );
 
     const registerUser = async () => {
         const data: IUserData = {

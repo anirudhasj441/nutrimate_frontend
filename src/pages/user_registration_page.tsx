@@ -91,14 +91,14 @@ const UserRegistrationPage: React.FC = () => {
                         onChange={(value)=> setHeight( Number(value.target.value) )} label="Height" fullWidth slotProps={{
                             input: {endAdornment: <InputAdornment position="end">cm</InputAdornment>},
                             htmlInput: {
-                                pattern: "[0-9]*",
+                                step: 'any',
                                 min: 50
                             }
                         }} />
                         <TextField required variant="outlined" type="number" size="small" value={weight} onChange={value => setWeight(Number(value.target.value))} label="Weight" fullWidth slotProps={{
                             input: {endAdornment: <InputAdornment position="end">kg</InputAdornment>},
                             htmlInput: {
-                                pattern: "[0-9]*",
+                                step: 'any',
                                 min: 20
                             }
                         }} />

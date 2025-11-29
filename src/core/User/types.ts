@@ -18,7 +18,7 @@ interface IUser {
     isAuthenticated: boolean,
     userData: IUserData | null,
     authenticate: () => Promise<boolean>,
-    login: ( username: string, password: string) => Promise<boolean>,
+    login: ( username: string, password: string) => Promise<IUserData | null >,
     logout: () => void,
     signup: ( userData: IUserData ) => Promise<boolean>
 }

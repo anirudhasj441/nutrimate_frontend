@@ -1,8 +1,9 @@
+import {UserProvider} from './core/User/user_provider';
+import { AlertProvider } from './components/my_alert/alert_provider';
+import router from "./router";
+
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
-import {UserProvider} from './core/User/user_provider';
-import router from "./router";
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -21,9 +22,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <UserProvider>
-        <RouterProvider router={router} />
-      </UserProvider>
+      <AlertProvider>
+        <UserProvider>
+          <RouterProvider router={router} />
+        </UserProvider>
+      </AlertProvider>
     </ThemeProvider>
   </StrictMode>,
 )

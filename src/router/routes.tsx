@@ -1,6 +1,7 @@
 import MainLayout from "../layout/main_layout";
 import React, { Suspense } from "react";
 import type { RouteObject } from "react-router-dom";
+import ProtectedRoute from "./protected_route";
 
 const IndexPage = React.lazy(() => import("../pages/index_page"));
 const MealPlanPage = React.lazy(() => import("../pages/meal_plan"));
@@ -25,35 +26,61 @@ const routes: RouteObject[] = [
             },
             {
                 path: "meal-plan",
-                element: (
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <MealPlanPage />
-                    </Suspense>
-                )
+                element: <ProtectedRoute/>,
+                children: [
+                    {
+                        path: "",
+                        element: (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <MealPlanPage />
+                            </Suspense>
+                        )
+                    }
+                ]
             },
             {
                 path: "healthy-recipes",
-                element: (
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <HealthyRecipesPage />
-                    </Suspense>
-                )
+                element: <ProtectedRoute/>,
+                children: [
+                    {   
+                        path: "",
+                        element: (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <HealthyRecipesPage />
+                            </Suspense>
+                        )
+
+                    }
+                ]
             },
             {
                 path: "track-progress",
-                element: (
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <TrackProgressPage />
-                    </Suspense>
-                )
+                element: <ProtectedRoute />,
+                children: [
+                    {
+                        path: "",
+                        element: (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <TrackProgressPage />
+                            </Suspense>
+                        )
+
+                    }
+                ]
             },
             {
                 path: "diet-plan",
-                element: (
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <DietPlanPage />
-                    </Suspense>
-                )
+                element: <ProtectedRoute/>,
+                children: [
+                    {
+                        path: "",
+                        element: (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <DietPlanPage />
+                            </Suspense>
+                        )
+                    }
+                ]
             },
             {
                 path: "user-registration",

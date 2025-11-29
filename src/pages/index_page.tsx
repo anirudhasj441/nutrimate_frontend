@@ -17,7 +17,7 @@ const IndexPage: React.FC = () => {
             </div> */}
 
             <PageTitle
-                title="Welcom to Nutrimate!"
+                title="Welcome to Nutrimate!"
                 subtitle="Your one-stop platform for personalized fitness, 
                     nutrition, and healthy living."
             />

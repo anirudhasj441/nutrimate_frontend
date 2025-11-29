@@ -2,21 +2,36 @@
 
 import {userContext} from "../core/User/user_provider";
 
-import React, { useContext, useState} from "react";
+import React, { useCallback, useContext, useState} from "react";
 import Typography from '@mui/material/Typography'
-import { AppBar, Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar } from "@mui/material";
+import { 
+    AppBar, Box, Button, Drawer, IconButton, List, ListItem, 
+    ListItemButton, ListItemIcon, ListItemText, Menu, 
+    MenuItem, Toolbar 
+} from "@mui/material";
 import { NavLink } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import type { IUser } from "../core/User/types";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Navbar: React.FC = () => {
     const [ open, setOpen ] = useState<boolean>( false )
     const user = useContext<IUser>( userContext );
 
+    const [userMenuAnchor, setUserMenuAnchor ] = 
+            useState<HTMLElement | null>(null);
+
+    const logout = useCallback( () => {
+        user.logout();
+        setUserMenuAnchor(null);
+    }, [user]);
+
     return (
         <>
             <Box component={'header'}>
-                <Box component="div" className="header flex items-center gap-5 px-5 py-2">
+                <Box component="div" 
+                className="header flex items-center gap-5 px-5 py-2">
                     <img src="/logo.png" alt="" width={70}/>
                     <Box component={'div'} className="flex gap-2">
                     <Typography variant="h4" sx={(theme) => ({
@@ -41,7 +56,8 @@ const Navbar: React.FC = () => {
                 <AppBar position="relative" sx={{
                     display: {xs: 'none', md: 'block'}
                 }}>
-                    <Toolbar component={'nav'} className="items-center" sx={( theme )=> ({
+                    <Toolbar component={'nav'} className="items-center" 
+                    sx={( theme )=> ({
                         height: { xs: '48px', md: '64px'},
                         padding: '0 !important',
                         '& a': {
@@ -58,14 +74,36 @@ const Navbar: React.FC = () => {
                             }
                         }
                     })}>
-                        <Typography component={NavLink} to="/" end >Home</Typography>
-                        <Typography component={NavLink} to="/meal-plan" end  >Meal Plan</Typography>
-                        <Typography component={NavLink} to="/healthy-recipes" end >Healthy Recipes</Typography>
-                        <Typography component={NavLink} to="/track-progress" end >Track Progress</Typography>
-                        <Typography component={NavLink} to="/diet-plan" end >Diet Plan</Typography>
+                        <Typography component={NavLink} to="/" end >
+                            Home
+                        </Typography>
+                        <Typography component={NavLink} to="/meal-plan" end  >
+                            Meal Plan
+                        </Typography>
+                        <Typography component={NavLink} to="/healthy-recipes" end >
+                            Healthy Recipes
+                        </Typography>
+                        <Typography component={NavLink} to="/track-progress" end >
+                            Track Progress
+                        </Typography>
+                        <Typography component={NavLink} to="/diet-plan" end >
+                            Diet Plan
+                        </Typography>
                         <div className="flex-1"></div>
                         { user.isAuthenticated ?
-                            <Typography className="p-5">{user.userData?.first_name}</Typography> :
+                            <>
+                                <Button variant="text" 
+                                color="inherit" 
+                                endIcon={
+                                    <ArrowDropDownIcon/>
+                                }
+                                onClick={ 
+                                    evt => setUserMenuAnchor(evt.currentTarget) 
+                                }>
+                                    {user.userData?.first_name}
+                                </Button>
+                            </>
+                             :
                             <>
                                 <Typography component={NavLink} to="/login" end >Log in</Typography>
                                 <Typography component={NavLink} to="/user-registration" end >Sign Up</Typography>
@@ -75,7 +113,10 @@ const Navbar: React.FC = () => {
                 </AppBar>
 
                 <Drawer open={open} anchor="right" onClose={() => setOpen(false)}>
-                    <Box component={'div'} role="presentation" className="w-60 h-full" onClick={()=>setOpen(false)} sx={(theme) => ({
+                    <Box component={'div'} role="presentation" 
+                    className="w-60 h-full"
+                    onClick={() => setOpen(false)} 
+                    sx={(theme) => ({
                         bgcolor: theme.palette.primary.main,
                         color: "white"
                     })}  >
@@ -112,20 +153,44 @@ const Navbar: React.FC = () => {
                                     <ListItemText primary="Diet Plan" />
                                 </ListItemButton>
                             </ListItem>
-                            <ListItem disablePadding>
-                                <ListItemButton component={NavLink} to="/login" end >
-                                    <ListItemText primary="Log in" />
-                                </ListItemButton>
-                            </ListItem>
-                            <ListItem disablePadding>
-                                <ListItemButton component={NavLink} to="/user-registration" end >
-                                    <ListItemText primary="Sign Up" />
-                                </ListItemButton>
-                            </ListItem>
+                            {
+                                user.isAuthenticated ? 
+                                <ListItem disablePadding>
+                                    <ListItemButton color="inherit" onClick={evt => { evt.stopPropagation(); setUserMenuAnchor(evt.currentTarget)}}>
+                                        <ListItemText>{user.userData?.first_name}</ListItemText>
+                                        <ListItemIcon color="white"><ArrowDropDownIcon sx={{color: "white"}} color="inherit"/></ListItemIcon>
+                                    </ListItemButton>
+                                </ListItem> :
+                                <>
+                                    <ListItem disablePadding>
+                                        <ListItemButton component={NavLink} to="/login" end >
+                                            <ListItemText primary="Log in" />
+                                        </ListItemButton>
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemButton component={NavLink} to="/user-registration" end >
+                                            <ListItemText primary="Sign Up" />
+                                        </ListItemButton>
+                                    </ListItem>
+                                </>
+                            }
                         </List>
                     </Box>
                 </Drawer>
             </Box>
+            
+            {/* User Menu */}
+            <Menu anchorEl={userMenuAnchor} anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right"
+            }} open={Boolean(userMenuAnchor)} onClose={() => setUserMenuAnchor(null)}>
+                <MenuItem onClick={logout}>
+                    <ListItemIcon>
+                        <LogoutIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Logout</ListItemText>
+                </MenuItem>
+            </Menu>
         </>
     );
 };

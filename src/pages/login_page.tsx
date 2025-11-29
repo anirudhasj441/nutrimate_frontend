@@ -1,24 +1,36 @@
 import {userContext} from "../core/User/user_provider";
-
 import PageContent from "../components/page_content";
 import PageTitle from "../components/page_title";
 import MyCard from "../components/my_card";
 
 import React, { useContext, useState } from "react";
 import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import type { IUser } from "../core/User/types";
+import { useAlert } from "../components/my_alert/alert_provider";
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const user = useContext<IUser>( userContext );
+    const alert = useAlert();
+
+    const navigate = useNavigate();
 
     const login = async ( ) => {
+        setLoading( true );
         const res = await user.login( username, password );
         console.log( res ? "LOgin successfull": "login failed");
         console.log( user.userData )
+        if( res ){
+            navigate('/');
+            alert.showAlert(  `Welcome back, ${res.first_name}!` );
+        } else {
+            alert.showAlert("Login failed. Please check your credentials.", "error" )
+        }
+        setLoading(false);
     }
 
     return (
@@ -47,7 +59,7 @@ const LoginPage: React.FC = () => {
                             </CardContent>
                             <Box component={'div'} className="flex-grow"></Box>
                             <CardContent>
-                                <Button type="submit" variant="contained" fullWidth>Login</Button>
+                                <Button loading={loading} type="submit" variant="contained" fullWidth>Login</Button>
                             </CardContent>
                         </Form>
                     </MyCard>

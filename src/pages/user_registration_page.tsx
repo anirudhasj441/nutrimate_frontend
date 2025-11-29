@@ -11,18 +11,17 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Typography, CardContent, TextField, Box, Button, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import dayjs from "dayjs";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import type { IUser, IUserData } from "../core/User/types";
+import { useAlert } from "../components/my_alert/alert_provider";
 
 const UserRegistrationPage: React.FC = () => {
-
-    // const checkStrength = () => {
-    //     console.log("Checking strength... (add logic)");
-    // };
-
     const user = useContext<IUser>( userContext );
+    const alert = useAlert();
+    const navigate = useNavigate();
 
     const registerUser = async () => {
+        setLoading(true);
         const data: IUserData = {
             username: username,
             first_name: firstName,
@@ -34,17 +33,18 @@ const UserRegistrationPage: React.FC = () => {
             weight: weight,
             goal: goal,
         }
-        console.log("Register user... (add logic)", data);
 
         const res = await user.signup( data );
 
-        console.log( res ? "signup successfull": "signup failed");
+        if(res) {
+            alert.showAlert( `Thank you for registering, ${firstName}! You can now log in to your account.` );
+            navigate('/login');
+        } else {
+            alert.showAlert("Registration failed!", "error")
+        }
+        setLoading(false);
         
     };
-
-    // // const clearUser = () => {
-    // //     console.log("Clear user... (add logic)");
-    // // };
 
     const [firstName, setFirstName ] = useState<string>('');
     const [lsatName, setLastName ] = useState<string>('');
@@ -55,6 +55,8 @@ const UserRegistrationPage: React.FC = () => {
     const [height, setHeight ] = useState<number>(50);
     const [weight, setWeight ] = useState<number>(20);
     const [goal, setGoal ] = useState<string>("GM");
+
+    const [loading, setLoading] = useState<boolean>(false)
 
     return (
         <>
@@ -112,10 +114,9 @@ const UserRegistrationPage: React.FC = () => {
                                 <MenuItem value="FL">Fat Loss</MenuItem>
                             </Select>
                         </FormControl>
-                        {/* <TextField variant="outlined" size="small" label="Goal" fullWidth /> */}
                     </CardContent>
                     <CardContent>
-                        <Button type="submit" variant="contained" fullWidth>Register</Button>
+                        <Button loading={loading} type="submit" variant="contained" fullWidth>Register</Button>
                     </CardContent>
                     </Form>
                 </MyCard>

@@ -7,7 +7,7 @@ interface IPageContent {
 
 const PageContent: React.FC<IPageContent> = ( props: IPageContent ) => {
     return (
-        <Box component={'section'} className="py-20" sx={(theme) => ({
+        <Box component={'section'} className="py-20 flex-grow" sx={(theme) => ({
             bgcolor: theme.custom.contentBgColor,
             backdropFilter: 'blur(5px)'
         })}>

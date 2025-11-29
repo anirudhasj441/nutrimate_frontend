@@ -19,7 +19,7 @@ const MainLayout: React.FC = () => {
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 overflowY: 'auto'
-            }} className="flex-1">
+            }} className="flex-grow flex flex-col">
                 <Outlet />
                 <Footer />
             </Box>

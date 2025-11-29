@@ -40,7 +40,7 @@ const defaultUserContext: IUser = {
   isAuthenticated: false,
   userData: null,
   authenticate: async () => { return false },
-  login: async (_username: string, _password: string ): Promise<boolean> => { return false },
+  login: async (_username: string, _password: string ): Promise<IUserData | null > => { return null },
   signup: async ( _userData: IUserData ): Promise<boolean> => { return false },
   logout: async () => {},
 };
@@ -68,13 +68,14 @@ const UserProvider: React.FC<IUserProvider> = ( props: IUserProvider ) => {
         return res;
     }
 
-    const login = async ( username: string, password: string ): Promise<boolean> => {
+    const login = async ( username: string, password: string ): Promise<IUserData | null> => {
         const res = await user.login( username, password );
         setIsAuthenticated( user.isAuthenticated );
         if(res){
             setUserData( user.userData );
+            return user.userData;
         }
-        return res;
+        return null;
     }
 
     const signup = async ( aUserData: IUserData ): Promise<boolean> => {

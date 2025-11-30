@@ -9,11 +9,13 @@ import type { Dayjs } from "dayjs";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { CardContent, TextField, Box, Button, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { CardContent, TextField, Box, Button, InputAdornment, FormControl, InputLabel, Select, MenuItem, IconButton } from "@mui/material";
 import dayjs from "dayjs";
 import { Form, useNavigate } from "react-router-dom";
 import type { IUser, IUserData } from "../core/User/types";
 import { useAlert } from "../components/my_alert/alert_provider";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const UserRegistrationPage: React.FC = () => {
     const user = useContext<IUser>( userContext );
@@ -63,6 +65,7 @@ const UserRegistrationPage: React.FC = () => {
     const [goal, setGoal ] = useState<string>("GM");
 
     const [loading, setLoading] = useState<boolean>(false)
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     return (
         <>
@@ -79,7 +82,29 @@ const UserRegistrationPage: React.FC = () => {
                             </Box>
                             <TextField required id="username" variant="outlined" size="small" label="Username" fullWidth value={username} onChange={evt => setUsername(evt.target.value)} />
                             <TextField required id="email" type="email" variant="outlined" size="small" label="Email" fullWidth value={email} onChange={evt => setEmail(evt.target.value)} />
-                            <TextField required id="password" variant="outlined" size="small" label="Password" fullWidth value={password} onChange={evt => setPassword(evt.target.value)} />
+                            <TextField required id="password" variant="outlined"
+                            type={showPassword ? "text" : "password"}
+                            size="small" label="Password" fullWidth 
+                            value={password} 
+                            onChange={
+                                evt => setPassword(evt.target.value)
+                            }
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={() => setShowPassword( !showPassword )}>
+                                                {
+                                                    showPassword ?
+                                                    <VisibilityOff fontSize="small"/> :
+                                                    <Visibility fontSize="small"/>
+                                                }
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }
+                            }} 
+                            />
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker label="Birth Date" value={birthDate} 
                                 format="DD/MM/YYYY" 

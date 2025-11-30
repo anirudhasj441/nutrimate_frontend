@@ -4,7 +4,6 @@ import type { SxProps, Theme }  from "@mui/material";
 interface IMyCard {
     children: React.ReactNode,
     width? : string,
-    height?: string,
     title?: string,
     sx?: SxProps<Theme>
 }
@@ -12,13 +11,7 @@ interface IMyCard {
 const MyCard: React.FC<IMyCard> = ( props: IMyCard ) => {
     return (
         <Card className="flex flex-col" elevation={12} sx={{
-            width: props.width ?? '300px',
-            maxWidth: '100svw',
-            // boxShadow: '0 4px 10px rgba(0, 0, 0, 0.15)',
-            // '& .MuiCardContent-root': {
-            //     height: props.height ?? 'auto',
-            //     textAlign: 'center'
-            // },
+            width: {xs: '100svw', md: props.width ?? '300px'},
             ...props.sx
         }}>
             {props.title && 

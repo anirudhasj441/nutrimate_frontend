@@ -32,12 +32,7 @@ const TrackProgressPage: React.FC = () => {
                     </Typography >
 
                     <Box component={'div'} className="flex flex-wrap justify-center gap-10">
-                        <MyCard sx={{
-                        width: {xs: '100%', md: '300px'}
-                    }}>
-                            <CardContent>
-                                <Typography fontSize={'18px'} fontWeight={'bold'}>Calories Consumed 🔥</Typography>
-                            </CardContent>
+                        <MyCard title="Calories Consumed 🔥">
                             <CardContent>
                                 <TextField variant="outlined" size="small" fullWidth label="Enter Calories"></TextField>
                             </CardContent>
@@ -46,12 +41,7 @@ const TrackProgressPage: React.FC = () => {
                             </CardContent>
                         </MyCard>
 
-                        <MyCard sx={{
-                        width: {xs: '100%', md: '300px'}
-                    }}>
-                            <CardContent>
-                                <Typography fontSize={'18px'} fontWeight={'bold'}>Steps Walked 👣</Typography>
-                            </CardContent>
+                        <MyCard title="Steps Walked 👣">
                             <CardContent>
                                 <TextField variant="outlined" size="small" fullWidth label="Enter Steps"></TextField>
                             </CardContent>
@@ -60,12 +50,7 @@ const TrackProgressPage: React.FC = () => {
                             </CardContent>
                         </MyCard>
 
-                        <MyCard sx={{
-                        width: {xs: '100%', md: '300px'}
-                    }}>
-                            <CardContent>
-                                <Typography fontSize={'18px'} fontWeight={'bold'}>Water Intake 💧</Typography>
-                            </CardContent>
+                        <MyCard title="Water Intake 💧">
                             <CardContent>
                                 <TextField variant="outlined" size="small" fullWidth label="Glasses of water"></TextField>
                             </CardContent>
@@ -83,12 +68,7 @@ const TrackProgressPage: React.FC = () => {
                     </Typography >
 
                     <Box component={'div'} className="flex justify-center">
-                        <MyCard sx={{
-                        width: {xs: '100%', md: '300px'}
-                    }}>
-                            <CardContent>
-                                <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Today's Summary</Typography>
-                            </CardContent>
+                        <MyCard title="Today's Summary">
                             <CardContent>
                                 <Box component={'div'} className="flex gap-2">
                                     <Typography fontWeight={'bold'}>Calories: </Typography>

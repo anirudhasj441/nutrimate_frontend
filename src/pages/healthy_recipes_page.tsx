@@ -42,12 +42,7 @@ const HealthyRecipesPage: React.FC = () => {
                 </Box>
 
                 <Box component={'div'} className="flex flex-wrap justify-center gap-10">
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Protein Oats</Typography>
-                        </CardContent>
+                    <MyCard title="Protein Oats">
                         <CardContent>
                             <Typography>Oats + banana + whey + nuts</Typography>
                         </CardContent>
@@ -57,12 +52,7 @@ const HealthyRecipesPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Grilled Chicken Salad</Typography>
-                        </CardContent>
+                    <MyCard title="Grilled Chicken Salad">
                         <CardContent>
                             <Typography>Lean protein with fresh greens</Typography>
                         </CardContent>
@@ -72,12 +62,7 @@ const HealthyRecipesPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Veggie Stir Fry</Typography>
-                        </CardContent>
+                    <MyCard title="Veggie Stir Fry">
                         <CardContent>
                             <Typography>Colorful vegetables sautéed lightly</Typography>
                         </CardContent>
@@ -87,12 +72,7 @@ const HealthyRecipesPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Fruit Smoothie Bowl</Typography>
-                        </CardContent>
+                    <MyCard title="Fruit Smoothie Bowl">
                         <CardContent>
                             <Typography>Blended fruits with toppings</Typography>
                         </CardContent>

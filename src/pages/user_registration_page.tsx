@@ -4,12 +4,12 @@ import PageTitle from "../components/page_title";
 import PageContent from "../components/page_content";
 import MyCard from "../components/my_card";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import type { Dayjs } from "dayjs";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Typography, CardContent, TextField, Box, Button, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { CardContent, TextField, Box, Button, InputAdornment, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import dayjs from "dayjs";
 import { Form, useNavigate } from "react-router-dom";
 import type { IUser, IUserData } from "../core/User/types";
@@ -46,6 +46,12 @@ const UserRegistrationPage: React.FC = () => {
         
     };
 
+    useEffect( () => {
+        if( user.isAuthenticated ) {
+            navigate('/');
+        }
+    }, [user, navigate])
+
     const [firstName, setFirstName ] = useState<string>('');
     const [lsatName, setLastName ] = useState<string>('');
     const [username, setUsername ] = useState<string>('');
@@ -64,60 +70,56 @@ const UserRegistrationPage: React.FC = () => {
 
         <PageContent>
             <Box component={'div'} className="flex justify-center">
-                <MyCard width="500px">
+                <MyCard title="Registration Form" width="500px">
                     <Form onSubmit={registerUser}>
-
-                    <CardContent>
-                        <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Registration Form</Typography>
-                    </CardContent>
-                    <CardContent className="flex flex-col gap-5">
-                        <Box component={'div'} className="flex gap-5 flex-col md:flex-row">
-                            <TextField required id="first-name" variant="outlined" size="small" label="First Name" value={firstName} onChange={evt => setFirstName(evt.target.value)} fullWidth />
-                            <TextField required id="last-name" variant="outlined" size="small" label="Last Name" value={lsatName} onChange={evt => setLastName(evt.target.value)} fullWidth />
-                        </Box>
-                        <TextField required id="username" variant="outlined" size="small" label="Username" fullWidth value={username} onChange={evt => setUsername(evt.target.value)} />
-                        <TextField required id="email" type="email" variant="outlined" size="small" label="Email" fullWidth value={email} onChange={evt => setEmail(evt.target.value)} />
-                        <TextField required id="password" variant="outlined" size="small" label="Password" fullWidth value={password} onChange={evt => setPassword(evt.target.value)} />
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker label="Birth Date" value={birthDate} 
-                            format="DD/MM/YYYY" 
-                            onChange={
-                                (value) => setBirthDate(value)
-                            } 
-                            slotProps={{
-                                textField: {size: "small"}
+                        <CardContent className="flex flex-col gap-5">
+                            <Box component={'div'} className="flex gap-5 flex-col md:flex-row">
+                                <TextField required id="first-name" variant="outlined" size="small" label="First Name" value={firstName} onChange={evt => setFirstName(evt.target.value)} fullWidth />
+                                <TextField required id="last-name" variant="outlined" size="small" label="Last Name" value={lsatName} onChange={evt => setLastName(evt.target.value)} fullWidth />
+                            </Box>
+                            <TextField required id="username" variant="outlined" size="small" label="Username" fullWidth value={username} onChange={evt => setUsername(evt.target.value)} />
+                            <TextField required id="email" type="email" variant="outlined" size="small" label="Email" fullWidth value={email} onChange={evt => setEmail(evt.target.value)} />
+                            <TextField required id="password" variant="outlined" size="small" label="Password" fullWidth value={password} onChange={evt => setPassword(evt.target.value)} />
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker label="Birth Date" value={birthDate} 
+                                format="DD/MM/YYYY" 
+                                onChange={
+                                    (value) => setBirthDate(value)
+                                } 
+                                slotProps={{
+                                    textField: {size: "small"}
+                                }} />
+                            </LocalizationProvider>
+                            <TextField required variant="outlined" type="number" size="small" value={height}
+                            onChange={(value)=> setHeight( Number(value.target.value) )} label="Height" fullWidth slotProps={{
+                                input: {endAdornment: <InputAdornment position="end">cm</InputAdornment>},
+                                htmlInput: {
+                                    step: 'any',
+                                    min: 50
+                                }
                             }} />
-                        </LocalizationProvider>
-                        <TextField required variant="outlined" type="number" size="small" value={height}
-                        onChange={(value)=> setHeight( Number(value.target.value) )} label="Height" fullWidth slotProps={{
-                            input: {endAdornment: <InputAdornment position="end">cm</InputAdornment>},
-                            htmlInput: {
-                                step: 'any',
-                                min: 50
-                            }
-                        }} />
-                        <TextField required variant="outlined" type="number" size="small" value={weight} onChange={value => setWeight(Number(value.target.value))} label="Weight" fullWidth slotProps={{
-                            input: {endAdornment: <InputAdornment position="end">kg</InputAdornment>},
-                            htmlInput: {
-                                step: 'any',
-                                min: 20
-                            }
-                        }} />
-                        <FormControl required fullWidth size="small">
-                            <InputLabel>Goal</InputLabel>
-                            <Select fullWidth size="small" className="text-left" value={goal} onChange={(value) => setGoal(value.target.value)} label="Goal">
-                                <MenuItem value="LW">Lose Weight</MenuItem>
-                                <MenuItem value="GM">Gain Muscle</MenuItem>
-                                <MenuItem value="MW">Maintain Weight</MenuItem>
-                                <MenuItem value="IE">Improve Indurance</MenuItem>
-                                <MenuItem value="IF">Increase Flexibility</MenuItem>
-                                <MenuItem value="FL">Fat Loss</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </CardContent>
-                    <CardContent>
-                        <Button loading={loading} type="submit" variant="contained" fullWidth>Register</Button>
-                    </CardContent>
+                            <TextField required variant="outlined" type="number" size="small" value={weight} onChange={value => setWeight(Number(value.target.value))} label="Weight" fullWidth slotProps={{
+                                input: {endAdornment: <InputAdornment position="end">kg</InputAdornment>},
+                                htmlInput: {
+                                    step: 'any',
+                                    min: 20
+                                }
+                            }} />
+                            <FormControl required fullWidth size="small">
+                                <InputLabel>Goal</InputLabel>
+                                <Select fullWidth size="small" className="text-left" value={goal} onChange={(value) => setGoal(value.target.value)} label="Goal">
+                                    <MenuItem value="LW">Lose Weight</MenuItem>
+                                    <MenuItem value="GM">Gain Muscle</MenuItem>
+                                    <MenuItem value="MW">Maintain Weight</MenuItem>
+                                    <MenuItem value="IE">Improve Indurance</MenuItem>
+                                    <MenuItem value="IF">Increase Flexibility</MenuItem>
+                                    <MenuItem value="FL">Fat Loss</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </CardContent>
+                        <CardContent>
+                            <Button loading={loading} type="submit" variant="contained" fullWidth>Register</Button>
+                        </CardContent>
                     </Form>
                 </MyCard>
             </Box>

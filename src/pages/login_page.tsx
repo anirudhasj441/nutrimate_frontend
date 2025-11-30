@@ -4,15 +4,18 @@ import PageTitle from "../components/page_title";
 import MyCard from "../components/my_card";
 
 import React, { useContext, useEffect, useState } from "react";
-import { Box, Button, CardContent, TextField } from "@mui/material";
+import { Box, Button, CardContent, IconButton, InputAdornment, TextField } from "@mui/material";
 import { Form, useNavigate } from "react-router-dom";
 import type { IUser } from "../core/User/types";
 import { useAlert } from "../components/my_alert/alert_provider";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const user = useContext<IUser>( userContext );
     const alert = useAlert();
@@ -52,11 +55,27 @@ const LoginPage: React.FC = () => {
                                         evt => setUsername(evt.target.value)
                                     } 
                                     />
-                                    <TextField variant="outlined" size="small" 
+                                    <TextField type={showPassword ? "text" : "password"} variant="outlined" size="small" 
                                     label="password" fullWidth value={password} 
                                     onChange={
                                         evt => setPassword(evt.target.value)
-                                    } />
+                                    }
+                                    slotProps={{
+                                        input: {
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton onClick={() => setShowPassword( !showPassword )}>
+                                                        {
+                                                            showPassword ?
+                                                            <VisibilityOff fontSize="small"/> :
+                                                            <Visibility fontSize="small"/>
+                                                        }
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            )
+                                        }
+                                    }}
+                                    />
                             </CardContent>
                             <Box component={'div'} className="flex-grow"></Box>
                             <CardContent>

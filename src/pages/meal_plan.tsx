@@ -25,84 +25,49 @@ const MealPlanPage: React.FC = () => {
                     Weekly Meal Overview 🍽️
                 </Typography >
                 <Box component={'div'} className="flex flex-wrap gap-10 justify-center">
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Monday</Typography>
-                        </CardContent>
+                    <MyCard title="Monday">
                         <CardContent sx={{padding: '0 1.5rem !important', textAlign: 'left !important'}}>
                             <Typography marginY={'16px'}>Breakfast: Oatmeal with fruits</Typography>
                             <Typography marginY={'16px'}>Lunch: Grilled chicken salad</Typography>
                             <Typography marginY={'16px'}>Dinner: Veggie stir-fry</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Tuesday</Typography>
-                        </CardContent>
+                    <MyCard title="Tuesday">
                         <CardContent sx={{padding: '0 1.5rem !important', textAlign: 'left !important'}}>
                             <Typography marginY={'16px'}>Breakfast: Poha</Typography>
                             <Typography marginY={'16px'}>Lunch: Veg biryani</Typography>
                             <Typography marginY={'16px'}>Dinner: Soup + salad</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Wednesday</Typography>
-                        </CardContent>
+                    <MyCard title="Wednesday">
                         <CardContent sx={{padding: '0 1.5rem !important', textAlign: 'left !important'}}>
                             <Typography marginY={'16px'}>Breakfast: Poha</Typography>
                             <Typography marginY={'16px'}>Lunch: Veg biryani</Typography>
                             <Typography marginY={'16px'}>Dinner: Soup + salad</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Thursday</Typography>
-                        </CardContent>
+                    <MyCard title="Thursday">
                         <CardContent sx={{padding: '0 1.5rem !important', textAlign: 'left !important'}}>
                             <Typography marginY={'16px'}>Breakfast: Dosa + chutney</Typography>
                             <Typography marginY={'16px'}>Lunch: Grilled fish + veggies</Typography>
                             <Typography marginY={'16px'}>Dinner: Quinoa bowl</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Friday</Typography>
-                        </CardContent>
+                    <MyCard title="Friday">
                         <CardContent sx={{padding: '0 1.5rem !important', textAlign: 'left !important'}}>
                             <Typography marginY={'16px'}>Breakfast: Idli + sambar</Typography>
                             <Typography marginY={'16px'}>Lunch: Rajma + rice</Typography>
                             <Typography marginY={'16px'}>Dinner: Sprouts salad</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Saturday</Typography>
-                        </CardContent>
+                    <MyCard title="Saturday">
                         <CardContent sx={{padding: '0 1.5rem !important', textAlign: 'left !important'}}>
                             <Typography marginY={'16px'}>Breakfast: Upma</Typography>
                             <Typography marginY={'16px'}>Lunch: Chicken curry + roti</Typography>
                             <Typography marginY={'16px'}>Dinner: Pasta (wheat)</Typography>
                         </CardContent>
                     </MyCard>
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Sunday</Typography>
-                        </CardContent>
+                    <MyCard title="Sunday">
                         <CardContent sx={{padding: '0 1.5rem !important', textAlign: 'left !important'}}>
                             <Typography marginY={'16px'}>Breakfast: Paratha + curd</Typography>
                             <Typography marginY={'16px'}>Lunch: Veg thali</Typography>

@@ -17,12 +17,7 @@ const DietPlanPage: React.FC = () => {
                 <Box component={'div'} className="flex justify-center flex-wrap gap-10" >
                     {/* <h2>Your Personalized Diet Plan</h2>
                     <p>Calculate your BMI & daily calories to get an ideal diet recommendation.</p> */}
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '300px'}
-                    }} >
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>BMI Calculator</Typography>
-                        </CardContent>
+                    <MyCard title="BMI Calculator">
                         <CardContent className="gap-4 flex flex-col">
                             <TextField size="small" variant="outlined" 
                             label="Height" fullWidth
@@ -47,12 +42,7 @@ const DietPlanPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '300px'}
-                    }} >
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Daily Calories Need</Typography>
-                        </CardContent>
+                    <MyCard title="Daily Calories Need">
                         <CardContent className="gap-4 flex flex-col">
                             <TextField size="small" variant="outlined" 
                             label="Age" fullWidth
@@ -79,12 +69,7 @@ const DietPlanPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard sx={{
-                        width: {xs: '100%', md: '300px'}
-                    }} >
-                        <CardContent>
-                            <Typography gutterBottom fontSize={'18px'} fontWeight={'bold'}>Recommended Diet Plan</Typography>
-                        </CardContent>
+                    <MyCard title="Recommended Diet Plan">
                         <CardContent>
                             <Typography>Fill details to generate plan...</Typography>
                         </CardContent>

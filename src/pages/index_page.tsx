@@ -26,12 +26,8 @@ const IndexPage: React.FC = () => {
                 <Box component={'section'} className="flex
                     justify-center gap-10 flex-wrap"
                 >
-                    <MyCard width="250px" sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
+                    <MyCard title="Meal Plan 🍽️" >
                         <CardContent>
-                            <Typography gutterBottom fontWeight={'bold'}
-                                align="center" fontSize={18}>Meal Plan 🍽️</Typography>
                             <Typography>
                                 Get a customized weekly meal plan designed
                                 by nutrition experts.
@@ -46,14 +42,8 @@ const IndexPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="250px" sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
+                    <MyCard title="Healthy Recipes 🥗" >
                         <CardContent>
-                            <Typography gutterBottom fontWeight={'bold'}
-                                align="center" fontSize={18}>
-                                Healthy Recipes 🥗
-                            </Typography>
                             <Typography>
                                 Discover simple, tasty, and healthy recipes that
                                 support your goals.
@@ -68,11 +58,8 @@ const IndexPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="250px" sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
+                    <MyCard title="Track Progress 📊" >
                         <CardContent>
-                            <Typography gutterBottom fontWeight={'bold'} align="center" fontSize={18}>Track Progress 📊</Typography>
                             <Typography>Monitor your daily calories, steps, and fitness milestones.</Typography>
                         </CardContent>
                         <Box component={'div'} className="flex-grow" />
@@ -81,11 +68,8 @@ const IndexPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="250px" sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
+                    <MyCard title="Diet Plan 🥤" >
                         <CardContent>
-                            <Typography gutterBottom fontWeight={'bold'} align="center" fontSize={18}>Diet Plan 🥤</Typography>
                             <Typography>Choose a diet that suits your lifestyle — keto, vegan, or balanced.</Typography>
                         </CardContent>
                         <Box component={'div'} className="flex-grow" />
@@ -94,11 +78,8 @@ const IndexPage: React.FC = () => {
                         </CardContent>
                     </MyCard>
 
-                    <MyCard width="250px" sx={{
-                        width: {xs: '100%', md: '250px'}
-                    }}>
+                    <MyCard title="User Registration 👤" >
                         <CardContent>
-                            <Typography gutterBottom fontWeight={'bold'} align="center" fontSize={18}>User Registration 👤</Typography>
                             <Typography>Fill in your personal info — age, height, weight & goals — to get a personalized plan.</Typography>
                         </CardContent>
                         <Box component={'div'} className="flex-grow" />

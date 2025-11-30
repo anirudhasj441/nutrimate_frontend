@@ -3,8 +3,8 @@ import PageContent from "../components/page_content";
 import PageTitle from "../components/page_title";
 import MyCard from "../components/my_card";
 
-import React, { useContext, useState } from "react";
-import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { Box, Button, CardContent, TextField } from "@mui/material";
 import { Form, useNavigate } from "react-router-dom";
 import type { IUser } from "../core/User/types";
 import { useAlert } from "../components/my_alert/alert_provider";
@@ -25,7 +25,6 @@ const LoginPage: React.FC = () => {
         console.log( res ? "LOgin successfull": "login failed");
         console.log( user.userData )
         if( res ){
-            navigate('/');
             alert.showAlert(  `Welcome back, ${res.first_name}!` );
         } else {
             alert.showAlert("Login failed. Please check your credentials.", "error" )
@@ -33,17 +32,19 @@ const LoginPage: React.FC = () => {
         setLoading(false);
     }
 
+    useEffect( () => {
+        if( user.isAuthenticated ) {
+            navigate('/');
+        }
+    }, [user.isAuthenticated])
+
     return (
         <>
             <PageTitle title="Login" subtitle="Login to your account to access your persionalise plans."/>
             <PageContent>
                 <Box component={'div'} className="flex justify-center">
-                    <MyCard width="500px">
+                    <MyCard title="Login" width="500px">
                         <Form onSubmit={login}>
-                            <CardContent>
-                                <Typography gutterBottom fontSize={'18px'} 
-                                fontWeight={'bold'}>Login</Typography>
-                            </CardContent>
                             <CardContent className="flex flex-col gap-5">
                                     <TextField variant="outlined" size="small"
                                     label="username" fullWidth value={username} 

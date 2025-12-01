@@ -4,8 +4,11 @@ import PageContent from "../components/page_content";
 import React from "react";
 import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
 import MyCard from "../components/my_card";
+import { useNavigate } from "react-router-dom";
 
 const HealthyRecipesPage: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             {/* <div className="hero">
@@ -48,7 +51,7 @@ const HealthyRecipesPage: React.FC = () => {
                         </CardContent>
                         <Box component={'div'} className="flex-grow" />
                         <CardContent className="flex justify-center">
-                            <Button variant="contained" fullWidth>View More</Button>
+                            <Button variant="contained" fullWidth onClick={() => navigate('/recipe/1')}>View More</Button>
                         </CardContent>
                     </MyCard>
 

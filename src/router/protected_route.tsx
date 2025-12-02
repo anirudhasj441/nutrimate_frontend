@@ -10,13 +10,15 @@ const ProtectedRoute: React.FC = () => {
     const [checked, setChecked] = useState<boolean>(false);
 
     useEffect(() => {
+        if ( !user.checked ) return;
+
         if ( !user.isAuthenticated ){
             navigate('/login');
             alert.showAlert( "Oops! Please log in to access this content.", "warning");
         } else {
             setChecked( true );
         }
-    }, [ user.isAuthenticated, alert.showAlert, navigate])
+    }, [ user.isAuthenticated ])
 
 
     return(

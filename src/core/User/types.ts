@@ -15,6 +15,7 @@ interface IUserProvider {
 }
 
 interface IUser {
+    checked: boolean,
     isAuthenticated: boolean,
     userData: IUserData | null,
     authenticate: () => Promise<boolean>,

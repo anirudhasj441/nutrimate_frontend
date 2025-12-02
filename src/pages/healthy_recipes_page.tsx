@@ -1,13 +1,50 @@
 import PageTitle from "../components/page_title";
 import PageContent from "../components/page_content";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
 import MyCard from "../components/my_card";
 import { useNavigate } from "react-router-dom";
 
 const HealthyRecipesPage: React.FC = () => {
     const navigate = useNavigate();
+
+    const [ recipes, setRecipes ] = React.useState<any[]>([]);
+
+    
+    const fetcthRecipes = async (): Promise<any> => {
+        const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
+        console.log( "Backend URL:", baseUrl );
+
+        const res = await fetch( baseUrl + '/recipes/', {
+            method: 'GET',
+            headers: {
+                // "Content-Type": "application/json",
+                Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
+            }
+        })
+
+        if( !res.ok ) {
+            throw new Error("Failed to fetch recipes");
+        }
+
+        const response = await res.json();
+
+        return response;
+    }
+
+    useEffect(() => {
+        console.log( "Fetching recipes..." );
+
+        fetcthRecipes().then((response) => {
+            if(response === null ){ return }
+
+            setRecipes( response.recipes );
+
+        })
+
+    }, []);
 
     return (
         <>
@@ -45,45 +82,20 @@ const HealthyRecipesPage: React.FC = () => {
                 </Box>
 
                 <Box component={'div'} className="flex flex-wrap justify-center gap-10">
-                    <MyCard title="Protein Oats">
-                        <CardContent>
-                            <Typography>Oats + banana + whey + nuts</Typography>
-                        </CardContent>
-                        <Box component={'div'} className="flex-grow" />
-                        <CardContent className="flex justify-center">
-                            <Button variant="contained" fullWidth onClick={() => navigate('/recipe/1')}>View More</Button>
-                        </CardContent>
-                    </MyCard>
-
-                    <MyCard title="Grilled Chicken Salad">
-                        <CardContent>
-                            <Typography>Lean protein with fresh greens</Typography>
-                        </CardContent>
-                        <Box component={'div'} className="flex-grow" />
-                        <CardContent className="flex justify-center">
-                            <Button variant="contained" fullWidth>View More</Button>
-                        </CardContent>
-                    </MyCard>
-
-                    <MyCard title="Veggie Stir Fry">
-                        <CardContent>
-                            <Typography>Colorful vegetables sautéed lightly</Typography>
-                        </CardContent>
-                        <Box component={'div'} className="flex-grow" />
-                        <CardContent className="flex justify-center">
-                            <Button variant="contained" fullWidth>View More</Button>
-                        </CardContent>
-                    </MyCard>
-
-                    <MyCard title="Fruit Smoothie Bowl">
-                        <CardContent>
-                            <Typography>Blended fruits with toppings</Typography>
-                        </CardContent>
-                        <Box component={'div'} className="flex-grow" />
-                        <CardContent className="flex justify-center">
-                            <Button variant="contained" fullWidth>View More</Button>
-                        </CardContent>
-                    </MyCard>
+                    {
+                        recipes.map((recipe) => (
+                            <MyCard title={recipe.title} key={recipe.id}>
+                                <CardContent>
+                                    <Typography>{recipe.description}</Typography>
+                                </CardContent>
+                                <Box component={'div'} className="flex-grow" />
+                                <CardContent className="flex justify-center">
+                                    <Button variant="contained" fullWidth onClick={() => navigate(`/recipe/${recipe.id}`)}>View More</Button>
+                                </CardContent>
+                            </MyCard>
+                        ))
+                        
+                    }
                 </Box>
             </PageContent>
         </>

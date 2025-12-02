@@ -37,12 +37,13 @@ import type { IUser, IUserData, IUserProvider } from "./types";
  */
 
 const defaultUserContext: IUser = {
-  isAuthenticated: false,
-  userData: null,
-  authenticate: async () => { return false },
-  login: async (_username: string, _password: string ): Promise<IUserData | null > => { return null },
-  signup: async ( _userData: IUserData ): Promise<boolean> => { return false },
-  logout: async () => {},
+    checked: false,
+    isAuthenticated: false,
+    userData: null,
+    authenticate: async () => { return false },
+    login: async (_username: string, _password: string ): Promise<IUserData | null > => { return null },
+    signup: async ( _userData: IUserData ): Promise<boolean> => { return false },
+    logout: async () => {},
 };
 
 const userContext = createContext<IUser>(defaultUserContext);
@@ -56,6 +57,7 @@ const UserProvider: React.FC<IUserProvider> = ( props: IUserProvider ) => {
 
     const [isAuthenticated, setIsAuthenticated ] = useState<boolean>(false);
     const [userData, setUserData] = useState< IUserData | null >(null);
+    const [checked, setChecked ] = useState<boolean>(false);
 
     const authenticate = async (): Promise<boolean> => {
         const res = await user.checkUserAuthenticated();
@@ -64,6 +66,8 @@ const UserProvider: React.FC<IUserProvider> = ( props: IUserProvider ) => {
         if(res) {
             setUserData(user.userData);
         }
+
+        setChecked( true );
 
         return res;
     }
@@ -107,6 +111,7 @@ const UserProvider: React.FC<IUserProvider> = ( props: IUserProvider ) => {
 
     return (
         <userContext.Provider value={{
+            checked: checked,
             isAuthenticated,
             userData,
             authenticate,

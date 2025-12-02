@@ -1,24 +1,61 @@
 import { Typography, Box, Table, TableContainer, TableRow, TableCell, TableBody, Divider, Card, CardContent } from '@mui/material';
 import PageContent from '../components/page_content';
 import PageTitle from '../components/page_title';
-import React from 'react';
-// import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 
 const RecipePage: React.FC = () => {
-    const rows = [
-        {key: 'Colories', value: '330'},
-        {key: 'Protein', value: '25'},
-        {key: 'Carbohydrate', value: '250'},
-        {key: 'Fat', value: '30'},
-    ]
+    const { id } = useParams<{ id: string }>();
+
+    const [recipe, setRecipe] = useState<any>({});
+
+    const [ nutritions, setNutritions ] = useState<{key: string, value: string}[]>([]);
+
+    const fetchRecipe = async () : Promise<any> => {
+        const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
+        const res = await fetch( baseUrl + `/recipes/${id}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
+            }
+        })
+
+        if( !res.ok ) {
+            throw new Error("Failed to fetch recipe");
+        }
+
+        const response = await res.json();
+        return response;
+
+    }
+
+    useEffect(() => {
+        console.log( "Fetching recipe..." );
+
+        fetchRecipe().then((response) => {
+            if(response === null ){ return }
+            setRecipe( response.recipe );
+
+            // Prepare nutrition rows
+            console.log( response.recipe );
+            const rows = [];
+            rows.push( { key: 'Calories', value: response.recipe.calories.toString() } );
+            rows.push( { key: 'Protein', value: response.recipe.protein.toString() } );
+            rows.push( { key: 'Carbohydrates', value: response.recipe.carbohydrates.toString() } );
+            rows.push( { key: 'Fat', value: response.recipe.fat.toString() } );
+
+            setNutritions( rows );
+        })     
+    }, []);
 
     return (
         <>
         <PageTitle title='Recipe Page' subtitle='This is sampple Recipe' />
         <PageContent >
             <Typography variant='h5' fontWeight={'bold'} color='secondary' gutterBottom>
-                Recipe Name
+                {recipe.title}
             </Typography>
             <Divider sx={{
                 // marginBottom: '2rem'
@@ -26,13 +63,7 @@ const RecipePage: React.FC = () => {
             <Box component='div' className='flex md:flex-row flex-col gap-5 py-10' >
                 <Box component='div' className='flex-grow'>
                     <Typography>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, nesciunt? Consequatur repudiandae, omnis est aperiam consequuntur cumque culpa molestiae, expedita cum ratione voluptate, velit mollitia. Eos fuga natus exercitationem ab!
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus optio ea, magnam, et ratione modi error quo in odio magni sunt dignissimos! Dolorem, optio. Fugit nulla exercitationem nemo dolor corrupti.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae aperiam dolorum suscipit cupiditate mollitia voluptates at? Aliquid ab, ea necessitatibus consectetur ut nesciunt et unde harum debitis, pariatur, ullam sint?
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, sapiente aspernatur dicta nostrum, iste nisi ipsum fuga saepe quod ut sequi officia enim corporis dolorem aut fugiat quas, repudiandae sunt.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum ducimus a harum temporibus sed alias. Ipsam eius totam suscipit, minus excepturi quis tempore quaerat dignissimos libero ducimus repellat et qui!
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima libero ullam tempore, sequi veritatis, dolore, repellat porro eveniet doloremque error accusamus ex velit minus. Rem quasi quae repellendus. Vitae, reprehenderit.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint sapiente magnam sit minus provident quos repellendus explicabo repellat aliquam voluptatibus pariatur quasi illum, vero voluptate, dolores facere! Sapiente, ipsum minima?
+                        {recipe.description}
                     </Typography>
                 </Box>
                 <Box component={'div'} className='' sx={{
@@ -53,7 +84,7 @@ const RecipePage: React.FC = () => {
                             </Typography>
                         <Table>
                             <TableBody>
-                            {rows.map((row) =>(
+                            {nutritions.map((row) =>(
                                 <TableRow key={row.key}>
                                     <TableCell component={'th'}>
                                         <Typography fontWeight={'bold'}>

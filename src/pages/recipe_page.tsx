@@ -40,11 +40,13 @@ const RecipePage: React.FC = () => {
 
             // Prepare nutrition rows
             console.log( response.recipe );
-            const rows = [];
-            rows.push( { key: 'Calories', value: response.recipe.calories.toString() } );
-            rows.push( { key: 'Protein', value: response.recipe.protein.toString() } );
-            rows.push( { key: 'Carbohydrates', value: response.recipe.carbohydrates.toString() } );
-            rows.push( { key: 'Fat', value: response.recipe.fat.toString() } );
+            const rows = [
+                { key: 'Calories', value: response.recipe.calories.toString() },
+                { key: 'Calories', value: response.recipe.calories.toString() },
+                { key: 'Protein', value: response.recipe.protein.toString() },
+                { key: 'Carbohydrates', value: response.recipe.carbohydrates.toString() },
+                { key: 'Fat', value: response.recipe.fat.toString() },
+            ];
 
             setNutritions( rows );
         })     
@@ -63,21 +65,13 @@ const RecipePage: React.FC = () => {
             <Box component='div' className='flex md:flex-row flex-col gap-5 py-10' >
                 <Box component='div' className='flex-grow'>
                     <Typography>
-                        {recipe.description}
+                        {recipe.instructions}
                     </Typography>
                 </Box>
                 <Box component={'div'} className='' sx={{
                     minWidth: '300px'
                 }}>
-                    {/* <Typography variant='h5' color='secondary' fontWeight={'bold'} gutterBottom>
-                        Nutritions
-                    </Typography>
-                    <Divider sx={{
-                        marginBottom: '2rem'
-                    }} /> */}
                     <Card elevation={12}>
-                        {/* <CardContent>
-                        </CardContent> */}
                         <TableContainer component={CardContent}>
                             <Typography variant='h6' gutterBottom color='' fontWeight={'bold'} >
                                 Nutritions

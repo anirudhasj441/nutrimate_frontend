@@ -18,7 +18,7 @@ const ProtectedRoute: React.FC = () => {
         } else {
             setChecked( true );
         }
-    }, [ user.isAuthenticated ])
+    }, [ user.isAuthenticated, user.checked ]);
 
 
     return(

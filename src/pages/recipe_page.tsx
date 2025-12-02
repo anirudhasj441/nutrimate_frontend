@@ -11,6 +11,11 @@ const RecipePage: React.FC = () => {
     const [recipe, setRecipe] = useState<any>({});
 
     const [ nutritions, setNutritions ] = useState<{key: string, value: string}[]>([]);
+    const [ ingredients, setIngredients ] = useState<{name: string, quantity: number, unit: string}[]>([]);
+    const [ prepareTime, setPrepareTime ] = useState<number>(0);
+    const [ cookingTime, seCookingTime ] = useState<number>(0);
+    const [ serving, setServing ] = useState<number>(0);
+
 
     const fetchRecipe = async () : Promise<any> => {
         const baseUrl = import.meta.env.VITE_BACKEND_URL;
@@ -32,23 +37,28 @@ const RecipePage: React.FC = () => {
     }
 
     useEffect(() => {
-        console.log( "Fetching recipe..." );
-
         fetchRecipe().then((response) => {
             if(response === null ){ return }
             setRecipe( response.recipe );
 
             // Prepare nutrition rows
-            console.log( response.recipe );
-            const rows = [
-                { key: 'Calories', value: response.recipe.calories.toString() },
+            const nutritionRows = [
                 { key: 'Calories', value: response.recipe.calories.toString() },
                 { key: 'Protein', value: response.recipe.protein.toString() },
                 { key: 'Carbohydrates', value: response.recipe.carbohydrates.toString() },
                 { key: 'Fat', value: response.recipe.fat.toString() },
             ];
 
-            setNutritions( rows );
+            setNutritions( nutritionRows );
+
+            // Prepare ingredients
+            const ingredientList = response.recipe.recipe_ingredients.map( (ing: any) => ({
+                name: ing.ingredient.name,
+                quantity: ing.quantity,
+                unit: ing.unit
+            }) );
+
+            setIngredients( ingredientList );
         })     
     }, []);
 
@@ -68,9 +78,78 @@ const RecipePage: React.FC = () => {
                         {recipe.instructions}
                     </Typography>
                 </Box>
-                <Box component={'div'} className='' sx={{
+                <Box component={'div'} className='flex flex-col gap-5' sx={{
                     minWidth: '300px'
                 }}>
+                    <Card elevation={12}>
+                        <TableContainer component={CardContent}>
+                            {/* <Typography variant='h6' gutterBottom color='' fontWeight={'bold'} >
+                                Ingredients
+                            </Typography> */}
+                        <Table>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell component={'th'}>
+                                        <Typography fontWeight={'bold'}>
+                                            Preparation Time
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography>
+                                            {prepareTime} minutes
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell component={'th'}>
+                                        <Typography fontWeight={'bold'}>
+                                            Cooking Time
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography>
+                                            {cookingTime} minutes
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                        </TableContainer>
+                    </Card>
+
+                    <Card elevation={12}>
+                        <TableContainer component={CardContent}>
+                            <Typography variant='h6' gutterBottom color='' fontWeight={'bold'} >
+                                Ingredients
+                            </Typography>
+                        <Table>
+                            <TableBody>
+                            {ingredients.map((row) =>(
+                                <TableRow key={row.name}>
+                                    <TableCell component={'th'}>
+                                        <Typography fontWeight={'bold'}>
+                                            {row.name}
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography>
+                                            {row.quantity}
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell width={'max-content'}>
+                                        <Typography>
+                                            {row.unit}
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                        </TableContainer>
+                    </Card>
+
+
+
                     <Card elevation={12}>
                         <TableContainer component={CardContent}>
                             <Typography variant='h6' gutterBottom color='' fontWeight={'bold'} >
@@ -78,6 +157,18 @@ const RecipePage: React.FC = () => {
                             </Typography>
                         <Table>
                             <TableBody>
+                                <TableRow>
+                                    <TableCell>
+                                        <Typography fontWeight={'bold'}>
+                                            Serving Size
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography>
+                                            {serving}
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
                             {nutritions.map((row) =>(
                                 <TableRow key={row.key}>
                                     <TableCell component={'th'}>
@@ -95,8 +186,9 @@ const RecipePage: React.FC = () => {
                             </TableBody>
                         </Table>
                         </TableContainer>
-
                     </Card>
+
+                    
                 </Box>
             </Box>
         </PageContent>

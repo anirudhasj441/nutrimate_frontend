@@ -61,7 +61,7 @@ const RecipePage: React.FC = () => {
 
     return (
         <>
-        <PageTitle title='Recipe Page' subtitle='This is sampple Recipe' />
+        <PageTitle title={recipe.title} subtitle={recipe.description} />
         <PageContent >
             <Typography variant='h5' fontWeight={'bold'} color='secondary' gutterBottom>
                 {recipe.title}

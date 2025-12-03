@@ -12,9 +12,6 @@ const RecipePage: React.FC = () => {
 
     const [ nutritions, setNutritions ] = useState<{key: string, value: string}[]>([]);
     const [ ingredients, setIngredients ] = useState<{name: string, quantity: number, unit: string}[]>([]);
-    const [ prepareTime, setPrepareTime ] = useState<number>(0);
-    const [ cookingTime, seCookingTime ] = useState<number>(0);
-    const [ serving, setServing ] = useState<number>(0);
 
 
     const fetchRecipe = async () : Promise<any> => {
@@ -96,7 +93,7 @@ const RecipePage: React.FC = () => {
                                     </TableCell>
                                     <TableCell>
                                         <Typography>
-                                            {prepareTime} minutes
+                                            {recipe.prep_time} minutes
                                         </Typography>
                                     </TableCell>
                                 </TableRow>
@@ -108,7 +105,7 @@ const RecipePage: React.FC = () => {
                                     </TableCell>
                                     <TableCell>
                                         <Typography>
-                                            {cookingTime} minutes
+                                            {recipe.cook_time} minutes
                                         </Typography>
                                     </TableCell>
                                 </TableRow>
@@ -165,7 +162,7 @@ const RecipePage: React.FC = () => {
                                     </TableCell>
                                     <TableCell>
                                         <Typography>
-                                            {serving}
+                                            {recipe.servings}
                                         </Typography>
                                     </TableCell>
                                 </TableRow>

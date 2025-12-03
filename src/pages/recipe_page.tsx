@@ -1,8 +1,9 @@
-import { Typography, Box, Table, TableContainer, TableRow, TableCell, TableBody, Divider, Card, CardContent } from '@mui/material';
+import { Typography, Box, Table, TableContainer, TableRow, TableCell, TableBody, Divider, Card, CardContent, Dialog, Button } from '@mui/material';
 import PageContent from '../components/page_content';
 import PageTitle from '../components/page_title';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import IngredientInfo from '../components/ingredient_info';
 
 
 const RecipePage: React.FC = () => {
@@ -11,8 +12,9 @@ const RecipePage: React.FC = () => {
     const [recipe, setRecipe] = useState<any>({});
 
     const [ nutritions, setNutritions ] = useState<{key: string, value: string}[]>([]);
-    const [ ingredients, setIngredients ] = useState<{name: string, quantity: number, unit: string}[]>([]);
-
+    const [ ingredients, setIngredients ] = useState<{name: string, ingredient: any, quantity: number, unit: string}[]>([]);
+    const [showIngradentInfo, setShowIngradentInfo] = useState<boolean>(false)
+    const [ingredient, setIngredient ] = useState<any>(null) 
 
     const fetchRecipe = async () : Promise<any> => {
         const baseUrl = import.meta.env.VITE_BACKEND_URL;
@@ -33,6 +35,16 @@ const RecipePage: React.FC = () => {
 
     }
 
+    const openIngredientInfo = (ingredient: {
+        name: string,
+        colories: number,
+        carbohydrates: number,
+        fat: number
+    }) => {
+        setIngredient( ingredient )
+        setShowIngradentInfo(true)
+    }
+
     useEffect(() => {
         fetchRecipe().then((response) => {
             if(response === null ){ return }
@@ -51,9 +63,12 @@ const RecipePage: React.FC = () => {
             // Prepare ingredients
             const ingredientList = response.recipe.recipe_ingredients.map( (ing: any) => ({
                 name: ing.ingredient.name,
+                ingredient: ing.ingredient,
                 quantity: ing.quantity,
                 unit: ing.unit
             }) );
+
+            console.log( ingredientList )
 
             setIngredients( ingredientList );
         })     
@@ -138,6 +153,9 @@ const RecipePage: React.FC = () => {
                                             {row.unit}
                                         </Typography>
                                     </TableCell>
+                                    <TableCell>
+                                        <Button variant='contained' onClick={() => openIngredientInfo(row.ingredient)}>More</Button>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                             </TableBody>
@@ -188,6 +206,9 @@ const RecipePage: React.FC = () => {
                     
                 </Box>
             </Box>
+            <Dialog open={showIngradentInfo} onClose={() => setShowIngradentInfo(false)}>
+                <IngredientInfo ingredient={ingredient} />
+            </Dialog>
         </PageContent>
         </>
     )

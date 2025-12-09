@@ -1,8 +1,8 @@
 import PageTitle from "../components/page_title";
 import PageContent from "../components/page_content";
 
-import React, { useEffect } from "react";
-import { Box, Button, CardContent, TextField, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button, CardContent, Typography } from "@mui/material";
 import MyCard from "../components/my_card";
 import { useNavigate } from "react-router-dom";
 
@@ -11,16 +11,15 @@ const HealthyRecipesPage: React.FC = () => {
 
     const [ recipes, setRecipes ] = React.useState<any[]>([]);
 
-    
+    const [selectedFilter, setSelectedFilter ] = useState<string>( 'ALL' );
+
     const fetcthRecipes = async (): Promise<any> => {
         const baseUrl = import.meta.env.VITE_BACKEND_URL;
-
-        console.log( "Backend URL:", baseUrl );
 
         const res = await fetch( baseUrl + '/recipes/', {
             method: 'GET',
             headers: {
-                // "Content-Type": "application/json",
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
             }
         })
@@ -34,8 +33,37 @@ const HealthyRecipesPage: React.FC = () => {
         return response;
     }
 
+    const filterRecipes = async ( filter: string ) => {
+        const baseUrl = import.meta.env.VITE_BACKEND_URL;
+        
+        const url = new URL(baseUrl + "/recipes/");
+
+        if (filter !== "ALL") {
+            url.searchParams.set("category", filter);
+        }
+
+        const res = await fetch( url.toString(), {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${sessionStorage.getItem('access_token')}`
+            }
+        })
+
+        if( !res.ok ) {
+            throw new Error("Failed to fetch recipes");
+        }
+
+        const response = await res.json();
+
+        setRecipes( response.recipes )
+
+        setSelectedFilter( filter );
+
+        return response;
+    }
+
     useEffect(() => {
-        console.log( "Fetching recipes..." );
 
         fetcthRecipes().then((response) => {
             if(response === null ){ return }
@@ -48,11 +76,6 @@ const HealthyRecipesPage: React.FC = () => {
 
     return (
         <>
-            {/* <div className="hero">
-                <h2>Explore Healthy & Delicious Recipes</h2>
-                <p>Search or filter recipes based on your mood, cravings, or fitness goals.</p>
-            </div> */}
-
             <PageTitle 
                 title="Explore Healthy & Delicious Recipes"
                 subtitle="Search or filter recipes based on your mood, 
@@ -60,24 +83,17 @@ const HealthyRecipesPage: React.FC = () => {
             />
 
             <PageContent>
-                <Typography variant="h5" textAlign={'center'} 
-                fontWeight={'bold'} color="#7e57c2" marginBottom={'20px'}>
-                    Search Recipes 🔍
-                </Typography >
-                <Box component={'div'} className="w-full md:w-1/2 mx-auto">
-                    <TextField variant="outlined" label="Search for recipes" size="small" fullWidth />
-                </Box>
-                
                 <Box component={'div'}  className="my-10">
                     <Typography variant="h5" textAlign={'center'} 
                         fontWeight={'bold'} color="#7e57c2" marginBottom={'20px'}>Filter by Category 🍽️</Typography>
                     <Box component={'div'} className="flex flex-wrap gap-5 justify-center">
-                        <Button variant="contained">Breakfast</Button>
-                        <Button variant="contained">Lunch</Button>
-                        <Button variant="contained">Dinner</Button>
-                        <Button variant="contained">High Protein</Button>
-                        <Button variant="contained">Low Carbs</Button>
-                        <Button variant="contained">All</Button>
+                        <Button variant="contained" onClick={() => filterRecipes("ALL")} color={selectedFilter == "ALL" ? 'secondary' : 'primary'}>All</Button>
+                        <Button variant="contained" onClick={() => filterRecipes("BF")} color={selectedFilter == "BF" ? 'secondary' : 'primary'}>Breakfast</Button>
+                        <Button variant="contained" onClick={() => filterRecipes("LU")} color={selectedFilter == "LU" ? 'secondary' : 'primary'}>Lunch</Button>
+                        <Button variant="contained" onClick={() => filterRecipes("DI")} color={selectedFilter == "DI" ? 'secondary' : 'primary'}>Dinner</Button>
+                        <Button variant="contained" onClick={() => filterRecipes("SN")} color={selectedFilter == "SN" ? 'secondary' : 'primary'}>Snacks</Button>
+                        <Button variant="contained" onClick={() => filterRecipes("DE")} color={selectedFilter == "DE" ? 'secondary' : 'primary'}>Dessert</Button>
+                        <Button variant="contained" onClick={() => filterRecipes("BE")} color={selectedFilter == "BE" ? 'secondary' : 'primary'}>Beverage</Button>
                     </Box>
                 </Box>
 

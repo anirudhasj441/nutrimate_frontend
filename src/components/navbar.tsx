@@ -9,15 +9,18 @@ import {
     ListItemButton, ListItemIcon, ListItemText, Menu, 
     MenuItem, Toolbar 
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import type { IUser } from "../core/User/types";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const Navbar: React.FC = () => {
     const [ open, setOpen ] = useState<boolean>( false )
     const user = useContext<IUser>( userContext );
+
+    const navigate = useNavigate();
 
     const [userMenuAnchor, setUserMenuAnchor ] = 
             useState<HTMLElement | null>(null);
@@ -180,10 +183,16 @@ const Navbar: React.FC = () => {
             </Box>
             
             {/* User Menu */}
-            <Menu anchorEl={userMenuAnchor} anchorOrigin={{
+            <Menu anchorEl={userMenuAnchor} onClick={() => setUserMenuAnchor(null)} anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right"
             }} open={Boolean(userMenuAnchor)} onClose={() => setUserMenuAnchor(null)}>
+                <MenuItem onClick={() => {navigate("/feedback")} }>
+                    <ListItemIcon>
+                        <FeedbackOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText>Feedback</ListItemText>
+                </MenuItem>
                 <MenuItem onClick={logout}>
                     <ListItemIcon>
                         <LogoutIcon fontSize="small" />

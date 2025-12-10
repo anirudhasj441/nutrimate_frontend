@@ -11,6 +11,7 @@ const DietPlanPage = React.lazy(() => import("../pages/diet_plan_page"));
 const UserRegistrationPage = React.lazy(() => import("../pages/user_registration_page"));
 const LoginPage = React.lazy( () => import("../pages/login_page"))
 const RecipePage = React.lazy(() => import("../pages/recipe_page"));
+const FeedbackPage = React.lazy(() => import("../pages/feedback_page"));
 
 const routes: RouteObject[] = [
     {
@@ -94,6 +95,21 @@ const routes: RouteObject[] = [
                                 <DietPlanPage />
                             </Suspense>
                         )
+                    }
+                ]
+            },
+            {
+                path: "feedback",
+                element: <ProtectedRoute/>,
+                children: [
+                    {
+                        path: "",
+                        element: (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <FeedbackPage />
+                            </Suspense>
+                        )
+
                     }
                 ]
             },

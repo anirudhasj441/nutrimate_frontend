@@ -27,83 +27,52 @@ const routes: RouteObject[] = [
                 )
             },
             {
-                path: "meal-plan",
                 element: <ProtectedRoute/>,
-                children: [
+                children:[
                     {
-                        path: "",
+                        path: "meal-plan",
                         element: (
                             <Suspense fallback={<div>Loading...</div>}>
                                 <MealPlanPage />
                             </Suspense>
                         )
-                    }
-                ]
-            },
-            {
-                path: "healthy-recipes",
-                element: <ProtectedRoute/>,
-                children: [
+                    },
                     {   
-                        path: "",
+                        path: "healthy-recipes",
                         element: (
                             <Suspense fallback={<div>Loading...</div>}>
                                 <HealthyRecipesPage />
                             </Suspense>
                         )
-
-                    }
-                ]
-            },
-            {
-                path: "recipe/:id",
-                element: <ProtectedRoute/>,
-                children: [
+        
+                    },
                     {
-                        path: "",
+                        path: "recipe/:id",
                         element: (
                             <Suspense fallback={<div>Loading...</div>}>
                                 <RecipePage />
                             </Suspense>
                         )
-                    }
-                ]
-            },
-            {
-                path: "track-progress",
-                element: <ProtectedRoute />,
-                children: [
+                    },
                     {
-                        path: "",
+                        path: "track-progress",
                         element: (
                             <Suspense fallback={<div>Loading...</div>}>
                                 <TrackProgressPage />
                             </Suspense>
                         )
 
-                    }
-                ]
-            },
-            {
-                path: "diet-plan",
-                element: <ProtectedRoute/>,
-                children: [
+                    },
                     {
-                        path: "",
+                        path: "diet-plan",
                         element: (
                             <Suspense fallback={<div>Loading...</div>}>
                                 <DietPlanPage />
                             </Suspense>
                         )
-                    }
-                ]
-            },
-            {
-                path: "feedback",
-                element: <ProtectedRoute/>,
-                children: [
+                    },
                     {
-                        path: "",
+                        path: "feedback",
                         element: (
                             <Suspense fallback={<div>Loading...</div>}>
                                 <FeedbackPage />

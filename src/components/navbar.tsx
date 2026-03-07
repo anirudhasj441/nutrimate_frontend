@@ -152,8 +152,8 @@ const Navbar: React.FC = () => {
                                 </ListItemButton>
                             </ListItem>
                             <ListItem disablePadding>
-                                <ListItemButton component={NavLink} to="/diet-plan" end >
-                                    <ListItemText primary="Diet Plan" />
+                                <ListItemButton component={NavLink} to="/body-metrics" end >
+                                    <ListItemText primary="Body Metrics" />
                                 </ListItemButton>
                             </ListItem>
                             {

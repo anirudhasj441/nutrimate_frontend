@@ -89,8 +89,8 @@ const Navbar: React.FC = () => {
                         <Typography component={NavLink} to="/track-progress" end >
                             Track Progress
                         </Typography>
-                        <Typography component={NavLink} to="/diet-plan" end >
-                            Diet Plan
+                        <Typography component={NavLink} to="/body-metrics" end >
+                            Body Metrics
                         </Typography>
                         <div className="flex-1"></div>
                         { user.isAuthenticated ?

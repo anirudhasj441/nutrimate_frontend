@@ -64,7 +64,7 @@ const TrackProgressPage: React.FC = () => {
                 <Box component={'div'} className="mt-10">
                     <Typography variant="h5" textAlign={'center'}
                         fontWeight={'bold'} color="#7e57c2" marginBottom={'20px'}>
-                        Your fullWidth Saved Progress 📊
+                        Your Saved Progress 📊
                     </Typography >
 
                     <Box component={'div'} className="flex justify-center">

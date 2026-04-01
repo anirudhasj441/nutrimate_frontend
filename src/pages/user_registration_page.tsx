@@ -60,8 +60,8 @@ const UserRegistrationPage: React.FC = () => {
     const [email, setEmail ] = useState<string>('');
     const [password, setPassword ] = useState<string>('');
     const [birthDate, setBirthDate ] = useState<Dayjs | null >(dayjs());
-    const [height, setHeight ] = useState<number>(170);
-    const [weight, setWeight ] = useState<number>(20);
+    const [height ] = useState<number>(170);
+    const [weight ] = useState<number>(20);
     const [goal, setGoal ] = useState<string>("GM");
 
     const [loading, setLoading] = useState<boolean>(false)

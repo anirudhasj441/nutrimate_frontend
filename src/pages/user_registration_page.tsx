@@ -60,7 +60,7 @@ const UserRegistrationPage: React.FC = () => {
     const [email, setEmail ] = useState<string>('');
     const [password, setPassword ] = useState<string>('');
     const [birthDate, setBirthDate ] = useState<Dayjs | null >(dayjs());
-    const [height, setHeight ] = useState<number>(50);
+    const [height, setHeight ] = useState<number>(170);
     const [weight, setWeight ] = useState<number>(20);
     const [goal, setGoal ] = useState<string>("GM");
 
@@ -115,21 +115,21 @@ const UserRegistrationPage: React.FC = () => {
                                     textField: {size: "small"}
                                 }} />
                             </LocalizationProvider>
-                            <TextField required variant="outlined" type="number" size="small" value={height}
+                            {/* <TextField required variant="outlined" type="number" size="small" value={height}
                             onChange={(value)=> setHeight( Number(value.target.value) )} label="Height" fullWidth slotProps={{
                                 input: {endAdornment: <InputAdornment position="end">cm</InputAdornment>},
                                 htmlInput: {
                                     step: 'any',
                                     min: 50
                                 }
-                            }} />
-                            <TextField required variant="outlined" type="number" size="small" value={weight} onChange={value => setWeight(Number(value.target.value))} label="Weight" fullWidth slotProps={{
+                            }} /> */}
+                            {/* <TextField required variant="outlined" type="number" size="small" value={weight} onChange={value => setWeight(Number(value.target.value))} label="Weight" fullWidth slotProps={{
                                 input: {endAdornment: <InputAdornment position="end">kg</InputAdornment>},
                                 htmlInput: {
                                     step: 'any',
                                     min: 20
                                 }
-                            }} />
+                            }} /> */}
                             <FormControl required fullWidth size="small">
                                 <InputLabel>Goal</InputLabel>
                                 <Select fullWidth size="small" className="text-left" value={goal} onChange={(value) => setGoal(value.target.value)} label="Goal">
